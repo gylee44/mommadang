@@ -2,6 +2,7 @@ package com.tukorea.mommadang
 
 import android.content.Intent
 import android.os.Bundle
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.tukorea.mommadang.databinding.ActivityLoginBinding
 
@@ -16,6 +17,17 @@ class LoginActivity : AppCompatActivity() {
 
         // 로그인 버튼 클릭 시 MainActivity 이동
         binding.btnLogin.setOnClickListener {
+            val id = binding.editId.text.toString()
+            val pw = binding.editPw.text.toString()
+
+            // 추가할 것!!    ex.if(id == " "&& pw =="")   아이디 비번 맞는지 (데이터베이스 연동해서 확인)
+
+            if(id.isEmpty() || pw.isEmpty()){
+                Toast.makeText(this, "아이디와 비밀번호를 모두 입력하세요.",Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
+            //성공 시
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
             finish()
