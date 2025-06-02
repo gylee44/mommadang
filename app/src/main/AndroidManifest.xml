@@ -23,10 +23,18 @@
             </intent-filter>
         </activity>
 
+        <!--로그인 화면 키보드 올라올 시 입력창 안가려지게 올라감-->
+        <activity
+            android:name=".LoginActivity"
+            android:windowSoftInputMode="adjustPan"/>
+
         <!-- 나머지 Activity -->
         <activity android:name=".MainActivity" />
-        <activity android:name=".LoginActivity" />
-        <activity android:name=".SignUpActivity" />
+
+        <activity
+            android:name=".SignUpActivity"
+            android:windowSoftInputMode="adjustPan"/>
+
         <activity android:name=".BoardWriteActivity" />
     </application>
 </manifest>

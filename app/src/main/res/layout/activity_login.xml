@@ -1,136 +1,141 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F5F5F5"
-    android:gravity="center"
-    android:orientation="vertical"
-    android:padding="50dp">
+    android:descendantFocusability="afterDescendants"
+    android:fillViewport="true"
+    android:focusableInTouchMode="true">
 
-    <!--맘마당 이미지-->
-    <ImageView
-        android:layout_width="260dp"
-        android:layout_height="260dp"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginBottom="32dp"
-        android:src="@drawable/ic_mommadang_login" />
-
-
-
-    <!--    카드 형태 박스 (입력폼 감싼거)-->
-    <androidx.cardview.widget.CardView
-        android:layout_width="320dp"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:background="@android:color/white"
-        app:cardCornerRadius="16dp"
-        app:cardElevation="4dp">
+        android:background="#F5F5F5"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:padding="50dp">
 
-        <LinearLayout
-            android:layout_width="match_parent"
+        <!--맘마당 이미지-->
+        <ImageView
+            android:layout_width="260dp"
+            android:layout_height="260dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="32dp"
+            android:src="@drawable/ic_mommadang_login" />
+
+
+        <!--    카드 형태 박스 (입력폼 감싼거)-->
+        <androidx.cardview.widget.CardView
+            android:layout_width="320dp"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="24dp">
+            android:layout_gravity="center_horizontal"
+            android:background="@android:color/white"
+            app:cardCornerRadius="16dp"
+            app:cardElevation="3dp">
 
-            <com.google.android.material.textfield.TextInputLayout
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="12dp"
-                app:boxBackgroundMode="outline"
-                app:boxCornerRadiusBottomEnd="12dp"
-                app:boxCornerRadiusBottomStart="12dp"
-                app:boxCornerRadiusTopEnd="12dp"
-                app:boxCornerRadiusTopStart="12dp">
+                android:orientation="vertical"
+                android:padding="24dp">
 
-                <!--아이디 입력란-->
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/edit_id"
+                <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
-                    android:layout_height="48dp"
-                    android:hint="아이디"
-                    android:padding="12dp" />
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="12dp"
+                    app:boxBackgroundMode="outline"
+                    app:boxCornerRadiusBottomEnd="12dp"
+                    app:boxCornerRadiusBottomStart="12dp"
+                    app:boxCornerRadiusTopEnd="12dp"
+                    app:boxCornerRadiusTopStart="12dp">
 
-            </com.google.android.material.textfield.TextInputLayout>
+                    <!--아이디 입력란-->
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/edit_id"
+                        android:layout_width="match_parent"
+                        android:layout_height="48dp"
+                        android:hint="아이디"
+                        android:inputType="text"
+                        android:padding="12dp" />
+
+                </com.google.android.material.textfield.TextInputLayout>
 
 
-<!--            비밀번호 입력상자(테두리)-->
-            <com.google.android.material.textfield.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
-                app:boxBackgroundMode="outline"
-                app:boxCornerRadiusBottomEnd="12dp"
-                app:boxCornerRadiusBottomStart="12dp"
-                app:boxCornerRadiusTopEnd="12dp"
-                app:boxCornerRadiusTopStart="12dp"
-                app:endIconMode="password_toggle">
-
-                <!--                    비밀번호 입력란-->
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/edit_pw"
+                <!--            비밀번호 입력상자(테두리)-->
+                <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
-                    android:layout_height="48dp"
-                    android:layout_marginTop="16dp"
-                    android:hint="비밀번호"
-                    android:inputType="textPassword"
-                    android:padding="12dp" />
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    app:boxBackgroundMode="outline"
+                    app:boxCornerRadiusBottomEnd="12dp"
+                    app:boxCornerRadiusBottomStart="12dp"
+                    app:boxCornerRadiusTopEnd="12dp"
+                    app:boxCornerRadiusTopStart="12dp"
+                    app:endIconMode="password_toggle">
 
-            </com.google.android.material.textfield.TextInputLayout>
+                    <!--                    비밀번호 입력란-->
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/edit_pw"
+                        android:layout_width="match_parent"
+                        android:layout_height="48dp"
+                        android:hint="비밀번호"
+                        android:inputType="textPassword"
+                        android:padding="12dp" />
 
-            <!--            아이디 기억 입력박스-->
-            <CheckBox
-                android:id="@+id/chk_remember"
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <!--            아이디 기억 입력박스-->
+                <CheckBox
+                    android:id="@+id/chk_remember"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:minHeight="48dp"
+                    android:text="아이디 저장"
+                    android:textSize="13sp" />
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <!--로그인 버튼-->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_login"
+            style="@style/MyLoginButtonStyle"
+            android:layout_width="320dp"
+            android:layout_height="48dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="16dp"
+            android:text="로그인" />
+
+        <!--회원가입 (아직 회원이 아니신가요? 글)-->
+        <LinearLayout
+            android:id="@+id/signup_container"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:gravity="center_horizontal"
+            android:minWidth="48dp"
+            android:minHeight="48dp"
+            android:orientation="horizontal"
+            android:padding="12dp">
+
+            <TextView
+                android:id="@+id/txt_prompt1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:minHeight="48dp"
-                android:layout_marginTop="4dp"
-                android:text="아이디 저장"
-                android:textSize="13sp" />
+                android:layout_gravity="center"
+                android:layout_marginRight="4dp"
+                android:text="아직 회원이 아니신가요?" />
+
+            <TextView
+                android:id="@+id/txt_signup"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="회원가입"
+                android:textColor="#3A7E84"
+                android:textSize="15sp"
+                android:textStyle="bold" />
         </LinearLayout>
-    </androidx.cardview.widget.CardView>
 
-    <!--로그인 버튼-->
-    <Button
-        android:id="@+id/btn_login"
-        android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:layout_marginTop="16dp"
-        android:backgroundTint="@color/Apricot"
-        android:text="로그인"
-        android:textColor="#41372c"
-        android:textSize="18sp" />
-
-    <!--회원가입 (아직 회원이 아니신가요? 글)-->
-    <LinearLayout
-        android:id="@+id/signup_container"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        android:clickable="true"
-        android:focusable="true"
-        android:gravity="center"
-        android:minHeight="48dp"
-        android:minWidth="48dp"
-        android:padding="12dp"
-        android:orientation="horizontal">
-
-        <TextView
-            android:id="@+id/txt_prompt"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginRight="4dp"
-            android:text="아직 회원이 아니신가요?" />
-
-        <TextView
-            android:id="@+id/txt_signup"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paintFlags="underline"
-            android:text="회원가입"
-            android:textStyle="bold"
-            android:textColor="#3A7E84"/>
     </LinearLayout>
-
-</LinearLayout>
+</androidx.core.widget.NestedScrollView>

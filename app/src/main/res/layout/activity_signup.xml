@@ -1,87 +1,229 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/white">
+    android:background="#F5F5F5">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
+        android:layout_gravity="center"
         android:gravity="center"
+        android:orientation="vertical"
         android:padding="24dp">
 
-        <!-- 카드 형태 입력 영역 -->
-        <LinearLayout
-            android:layout_width="match_parent"
+        <!--    카드 형태 박스 (입력폼 감싼거)-->
+        <androidx.cardview.widget.CardView
+            android:layout_width="320dp"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:background="@drawable/bg_signup_card"
-            android:padding="16dp"
-            android:layout_marginBottom="24dp">
+            android:layout_gravity="center_horizontal"
+            android:background="@android:color/white"
+            app:cardCornerRadius="16dp"
+            app:cardElevation="3dp">
 
-            <!-- 아이디 입력 + 중복확인 -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:gravity="center_vertical"
-                android:layout_marginBottom="8dp">
+                android:orientation="vertical"
+                android:padding="16dp">
 
-                <EditText
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:hint="아이디" />
 
-                <Button
-                    android:layout_width="wrap_content"
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="아이디 중복 확인"
-                    android:layout_marginStart="8dp" />
+                    android:layout_marginBottom="8dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <!-- 아이디 입력 창-->
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        app:boxBackgroundMode="outline"
+                        app:boxCornerRadiusBottomEnd="12dp"
+                        app:boxCornerRadiusBottomStart="12dp"
+                        app:boxCornerRadiusTopEnd="12dp"
+                        app:boxCornerRadiusTopStart="12dp">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/edit_signup_id"
+                            android:layout_width="match_parent"
+                            android:layout_height="48dp"
+                            android:hint="아이디"
+                            android:inputType="text"
+                            android:padding="12dp" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <!--아이디 중복 버튼-->
+                    <Button
+                        android:id="@+id/edit_text_id_confirm"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:text="아이디 중복 확인" />
+                </LinearLayout>
+
+                <!--비밀번호 입력 창-->
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    app:boxBackgroundMode="outline"
+                    app:boxCornerRadiusBottomEnd="12dp"
+                    app:boxCornerRadiusBottomStart="12dp"
+                    app:boxCornerRadiusTopEnd="12dp"
+                    app:boxCornerRadiusTopStart="12dp"
+                    app:endIconMode="password_toggle">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/edit_signup_pw"
+                        android:layout_width="match_parent"
+                        android:layout_height="48dp"
+                        android:hint="비밀번호"
+                        android:inputType="textPassword"
+                        android:padding="12dp" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <!--비밀번호 확인 창-->
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    app:boxBackgroundMode="outline"
+                    app:boxCornerRadiusBottomEnd="12dp"
+                    app:boxCornerRadiusBottomStart="12dp"
+                    app:boxCornerRadiusTopEnd="12dp"
+                    app:boxCornerRadiusTopStart="12dp"
+                    app:endIconMode="password_toggle">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/edit_signup_pw_confirm"
+                        android:layout_width="match_parent"
+                        android:layout_height="48dp"
+                        android:hint="비밀번호 확인"
+                        android:inputType="textPassword"
+                        android:padding="12dp" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <!--이름 입력 창-->
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    app:boxBackgroundMode="outline"
+                    app:boxCornerRadiusBottomEnd="12dp"
+                    app:boxCornerRadiusBottomStart="12dp"
+                    app:boxCornerRadiusTopEnd="12dp"
+                    app:boxCornerRadiusTopStart="12dp">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/edit_signup_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="48dp"
+                        android:hint="이름"
+                        android:inputType="text" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <!--전번 입력 창-->
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    app:boxBackgroundMode="outline"
+                    app:boxCornerRadiusBottomEnd="12dp"
+                    app:boxCornerRadiusBottomStart="12dp"
+                    app:boxCornerRadiusTopEnd="12dp"
+                    app:boxCornerRadiusTopStart="12dp">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/edit_signup_phone"
+                        android:layout_width="match_parent"
+                        android:layout_height="48dp"
+                        android:hint="휴대전화번호"
+                        android:inputType="phone" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <!--닉네임 입력 창-->
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    app:boxBackgroundMode="outline"
+                    app:boxCornerRadiusBottomEnd="12dp"
+                    app:boxCornerRadiusBottomStart="12dp"
+                    app:boxCornerRadiusTopEnd="12dp"
+                    app:boxCornerRadiusTopStart="12dp">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/edit_signup_nickname"
+                        android:layout_width="match_parent"
+                        android:layout_height="48dp"
+                        android:hint="닉네임" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <!--지역 입력 창-->
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/edit_signup_region"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    app:boxBackgroundMode="outline"
+                    app:boxCornerRadiusBottomEnd="12dp"
+                    app:boxCornerRadiusBottomStart="12dp"
+                    app:boxCornerRadiusTopEnd="12dp"
+                    app:boxCornerRadiusTopStart="12dp">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="48dp"
+                        android:hint="지역"
+                        android:inputType="textPostalAddress"/>
+                </com.google.android.material.textfield.TextInputLayout>
+
             </LinearLayout>
+        </androidx.cardview.widget.CardView>
 
-            <!-- 나머지 입력란들 -->
-            <EditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="비밀번호"
-                android:inputType="textPassword"
-                android:layout_marginBottom="8dp" />
-
-            <EditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="이름"
-                android:layout_marginBottom="8dp" />
-
-            <EditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="휴대전화번호"
-                android:inputType="phone"
-                android:layout_marginBottom="8dp" />
-
-            <EditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="닉네임"
-                android:layout_marginBottom="8dp" />
-
-            <EditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="지역" />
-        </LinearLayout>
-
-        <!-- 하단 버튼 -->
-        <Button
+        <!--회원가입 버튼-->
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/btn_signup"
+            style="@style/MyLoginButtonStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="회원가입 , 로그인"
+            android:layout_marginTop="16dp"
             android:background="@drawable/bg_signup_button"
-            android:textColor="#77A469"
             android:paddingHorizontal="32dp"
-            android:paddingVertical="12dp" />
+            android:paddingVertical="12dp"
+            android:text="회원가입" />
+
+        <!--로그인 화면으로 돌아갈건지 묻는 문구-->
+        <LinearLayout
+            android:id="@+id/login_container"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:gravity="center_horizontal"
+            android:minWidth="48dp"
+            android:minHeight="48dp"
+            android:orientation="horizontal"
+            android:padding="12dp">
+
+            <TextView
+                android:id="@+id/txt_prompt2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginRight="4dp"
+                android:text="이미 계정이 있으신가요?" />
+
+            <TextView
+                android:id="@+id/txt_login"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="로그인 화면"
+                android:textColor="#3A7E84"
+                android:textSize="15sp"
+                android:textStyle="bold" />
+        </LinearLayout>
     </LinearLayout>
 </ScrollView>
