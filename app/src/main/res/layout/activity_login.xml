@@ -14,7 +14,9 @@
         android:layout_height="260dp"
         android:layout_gravity="center_horizontal"
         android:layout_marginBottom="32dp"
-        android:src="@drawable/ic_mommadang" />
+        android:src="@drawable/ic_mommadang_login" />
+
+
 
     <!--    카드 형태 박스 (입력폼 감싼거)-->
     <androidx.cardview.widget.CardView
@@ -22,7 +24,6 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:background="@android:color/white"
-        android:padding="32dp"
         app:cardCornerRadius="16dp"
         app:cardElevation="4dp">
 
@@ -30,7 +31,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="32dp">
+            android:padding="24dp">
 
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
@@ -81,11 +82,11 @@
             <CheckBox
                 android:id="@+id/chk_remember"
                 android:layout_width="wrap_content"
-                android:layout_height="30dp"
-                android:layout_marginTop="16dp"
-                android:text="Remember me"
-                android:textSize="14sp" />
-
+                android:layout_height="wrap_content"
+                android:minHeight="48dp"
+                android:layout_marginTop="4dp"
+                android:text="아이디 저장"
+                android:textSize="13sp" />
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 
@@ -101,12 +102,35 @@
         android:textSize="18sp" />
 
     <!--회원가입 (아직 회원이 아니신가요? 글)-->
-    <TextView
-        android:id="@+id/txt_signup"
+    <LinearLayout
+        android:id="@+id/signup_container"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
         android:layout_marginTop="12dp"
-        android:text="아직 회원이 아니신가요?" />
+        android:clickable="true"
+        android:focusable="true"
+        android:gravity="center"
+        android:minHeight="48dp"
+        android:minWidth="48dp"
+        android:padding="12dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/txt_prompt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginRight="4dp"
+            android:text="아직 회원이 아니신가요?" />
+
+        <TextView
+            android:id="@+id/txt_signup"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paintFlags="underline"
+            android:text="회원가입"
+            android:textStyle="bold"
+            android:textColor="#3A7E84"/>
+    </LinearLayout>
 
 </LinearLayout>
