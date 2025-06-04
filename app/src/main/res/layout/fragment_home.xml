@@ -1,58 +1,40 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingStart="24dp"
-    android:paddingEnd="24dp"
-    android:paddingTop="32dp"
-    android:paddingBottom="32dp"
-    android:background="@android:color/white">
+    android:fitsSystemWindows="true"
+    android:background="#F5F5F5">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:padding="40dp">
 
-        <!-- 지역 행사 타이틀 -->
-        <LinearLayout
+        <!-- 지역 행사 텍스트 -->
+        <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center_vertical"
-            android:layout_marginBottom="12dp">
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="지역 행사"
-                android:textSize="18sp"
-                android:textColor="#000000"
-                android:textStyle="bold" />
-
-            <ImageView
-                android:id="@+id/ic_arrow_right"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:src="@drawable/ic_arrow_right"
-                android:contentDescription="더보기" />
-        </LinearLayout>
+            android:text="지역 행사"
+            android:textSize="18sp"
+            android:layout_marginTop="60dp"
+            android:textColor="#000000"
+            android:textStyle="bold"
+            android:layout_marginBottom="8dp" />
 
         <!-- 행사 배너 -->
         <ImageView
             android:layout_width="match_parent"
-            android:layout_height="160dp"
+            android:layout_height="150dp"
             android:src="@drawable/sample_banner"
-            android:scaleType="centerCrop"
-            android:background="@drawable/bg_card_rounded"
-            android:layout_marginBottom="24dp" />
+            android:layout_marginBottom="10dp" />
 
-        <!-- 날씨 -->
+        <!-- 날씨 카드 -->
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="100dp"
+            android:layout_height="120dp"
             android:orientation="horizontal"
             android:gravity="center_vertical"
-            android:background="#DDF5FF"
+            android:background="@drawable/bg_card_rounded"
             android:padding="16dp"
             android:layout_marginBottom="16dp">
 
@@ -76,64 +58,64 @@
                 android:id="@+id/ic_weather_sun"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:src="@drawable/ic_weather_sun"
-                android:contentDescription="날씨 아이콘" />
+                android:src="@drawable/ic_weather_sun" />
         </LinearLayout>
 
-        <!-- 게시판 블록 (이미지 유지) -->
+        <!-- 게시판 카드 -->
         <LinearLayout
             android:id="@+id/boardCard"
             android:layout_width="match_parent"
-            android:layout_height="100dp"
+            android:layout_height="120dp"
             android:orientation="horizontal"
-            android:gravity="center"
-            android:background="#DDF5FF"
+            android:gravity="center_vertical"
+            android:background="@drawable/bg_card_rounded"
             android:layout_marginBottom="16dp"
-            android:padding="16dp">
+            android:paddingStart="24dp"
+            android:paddingEnd="24dp">
 
             <ImageView
-                android:layout_width="80dp"
-                android:layout_height="80dp"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
                 android:src="@drawable/sample_board"
                 android:contentDescription="게시판"
-                android:layout_marginEnd="12dp" />
+                android:layout_marginEnd="16dp" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="게시판"
                 android:textSize="16sp"
-                android:textColor="#222222"/>
+                android:textColor="#222222" />
         </LinearLayout>
 
-        <!-- 지도 + 내정보 -->
+        <!-- 지도 & 내 정보 -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:weightSum="2"
             android:layout_marginBottom="16dp"
-            android:divider="@android:color/transparent"
-            android:showDividers="middle"
-            android:dividerPadding="8dp">
+            android:weightSum="2">
 
+            <!-- 지도 -->
             <ImageView
                 android:layout_width="0dp"
-                android:layout_height="100dp"
+                android:layout_height="120dp"
                 android:layout_weight="1"
                 android:src="@drawable/sample_map"
-                android:scaleType="centerCrop"
-                android:background="#DDF5FF" />
 
+                android:scaleType="centerCrop"
+                android:background="@drawable/bg_card_rounded"
+                android:layout_marginEnd="8dp" />
+
+            <!-- 내 정보 -->
             <LinearLayout
                 android:id="@+id/profileCard"
                 android:layout_width="0dp"
-                android:layout_height="100dp"
+                android:layout_height="120dp"
                 android:layout_weight="1"
                 android:orientation="vertical"
                 android:gravity="center"
-                android:background="#DDF5FF"
-                android:layout_marginStart="8dp">
+                android:background="@drawable/bg_card_rounded">
 
                 <ImageView
                     android:layout_width="40dp"
@@ -150,5 +132,6 @@
                     android:layout_marginTop="4dp" />
             </LinearLayout>
         </LinearLayout>
+
     </LinearLayout>
 </ScrollView>

@@ -21,10 +21,7 @@ class HomeFragment : Fragment() {
 
         // ▼ ▼ ▼ 클릭 이벤트 정의 ▼ ▼ ▼
 
-        // 지역 행사 화살표 클릭
-        binding.icArrowRight.setOnClickListener {
-            Toast.makeText(requireContext(), "지역 행사 더보기 클릭됨", Toast.LENGTH_SHORT).show()
-        }
+
 
         // 게시판 카드 클릭 → BoardFragment로 전환
         binding.boardCard.setOnClickListener {
