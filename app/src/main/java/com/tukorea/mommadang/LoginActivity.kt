@@ -2,44 +2,55 @@ package com.tukorea.mommadang
 
 import android.content.Intent
 import android.graphics.Paint
-import android.graphics.Paint.UNDERLINE_TEXT_FLAG
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.google.firebase.auth.FirebaseAuth
 import com.tukorea.mommadang.databinding.ActivityLoginBinding
 
 class LoginActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityLoginBinding
+    private lateinit var auth: FirebaseAuth
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        //회원가입 밑줄
+        auth = FirebaseAuth.getInstance()
+
+        // "회원가입" 텍스트에 밑줄 효과
         binding.txtSignup.paintFlags = binding.txtSignup.paintFlags or Paint.UNDERLINE_TEXT_FLAG
 
-
-        // 로그인 버튼 클릭 시 MainActivity 이동
+        // 로그인 버튼 클릭 시
         binding.btnLogin.setOnClickListener {
-            val id = binding.editId.text.toString()
-            val pw = binding.editPw.text.toString()
-
-            // 추가할 것!!    ex.if(id == " "&& pw =="")   아이디 비번 맞는지 (데이터베이스 연동해서 확인)
+            val id = binding.editId.text.toString().trim()
+            val pw = binding.editPw.text.toString().trim()
 
             if (id.isEmpty() || pw.isEmpty()) {
                 Toast.makeText(this, "아이디와 비밀번호를 모두 입력하세요.", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
 
-            //성공 시
-            val intent = Intent(this, MainActivity::class.java)
-            startActivity(intent)
-            finish()
+            val email = "$id@momma.com" // 회원가입 시 사용한 이메일 형식으로 변환
+
+            auth.signInWithEmailAndPassword(email, pw)
+                .addOnCompleteListener(this) { task ->
+                    if (task.isSuccessful) {
+                        // 로그인 성공 → 메인 화면으로 이동
+                        Toast.makeText(this, "로그인 성공", Toast.LENGTH_SHORT).show()
+                        val intent = Intent(this, MainActivity::class.java)
+                        startActivity(intent)
+                        finish()
+                    } else {
+                        // 로그인 실패 → 오류 메시지 출력
+                        Toast.makeText(this, "로그인 실패: ${task.exception?.message}", Toast.LENGTH_SHORT).show()
+                    }
+                }
         }
 
-        // 회원가입 텍스트 클릭 시 SignupActivity 이동
+        // "회원가입" 클릭 시 회원가입 화면으로 이동
         binding.txtSignup.setOnClickListener {
             val intent = Intent(this, SignUpActivity::class.java)
             startActivity(intent)

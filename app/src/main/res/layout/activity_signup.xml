@@ -164,7 +164,6 @@
 
                 <!--지역 입력 창-->
                 <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/edit_signup_region"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="8dp"
@@ -175,6 +174,7 @@
                     app:boxCornerRadiusTopStart="12dp">
 
                     <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/edit_signup_region"
                         android:layout_width="match_parent"
                         android:layout_height="48dp"
                         android:hint="지역"

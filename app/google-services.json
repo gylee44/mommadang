@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "733870236771",
+    "firebase_url": "https://pjmommadang-4e60c-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "pjmommadang-4e60c",
+    "storage_bucket": "pjmommadang-4e60c.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:733870236771:android:c9ec34d6cec76779f8c456",
+        "android_client_info": {
+          "package_name": "com.tukorea.mommadang"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAN5VrftF276q5vegFRyjfiUfRnSxFyW9k"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
