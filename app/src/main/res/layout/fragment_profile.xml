@@ -8,7 +8,7 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:gravity="center_horizontal"
-        android:paddingTop="200dp"
+        android:layout_gravity="center"
         android:paddingHorizontal="34dp">
 
         <!-- 프로필 아이콘 -->

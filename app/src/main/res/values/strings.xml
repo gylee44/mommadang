@@ -2,4 +2,39 @@
     <string name="app_name">MomMaDang</string>
     <string name="label_local_event">지역 행사</string>
 
+    <!--    시흥시 주소 목록-->
+    <string-array name="sihung_legal_dongs">
+        <item>거모동</item>
+        <item>계수동</item>
+        <item>과림동</item>
+        <item>금이동</item>
+        <item>논곡동</item>
+        <item>능곡동</item>
+        <item>대야동</item>
+        <item>도창동</item>
+        <item>목감동</item>
+        <item>무지내동</item>
+        <item>미산동</item>
+        <item>배곧동</item>
+        <item>방산동</item>
+        <item>산현동</item>
+        <item>신천동</item>
+        <item>안현동</item>
+        <item>월곶동</item>
+        <item>은행동</item>
+        <item>장곡동</item>
+        <item>정왕1동</item>
+        <item>정왕2동</item>
+        <item>정왕3동</item>
+        <item>정왕4동</item>
+        <item>정왕본동</item>
+        <item>정왕동</item>
+        <item>조남동</item>
+        <item>죽율동</item>
+        <item>포동</item>
+        <item>하상동</item>
+        <item>하중동</item>
+        <item>화정동</item>
+    </string-array>
+
 </resources>
