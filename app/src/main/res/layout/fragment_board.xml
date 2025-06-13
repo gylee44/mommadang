@@ -13,6 +13,7 @@
 
         <!-- 상단 제목 + 검색 버튼 -->
         <RelativeLayout
+            android:layout_marginTop="20dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="12dp">
@@ -25,14 +26,6 @@
                 android:textSize="20sp"
                 android:textStyle="bold" />
 
-            <ImageView
-                android:id="@+id/btn_search"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:layout_alignParentEnd="true"
-                android:src="@drawable/ic_search"
-                android:contentDescription="검색"
-                android:layout_centerVertical="true" />
         </RelativeLayout>
 
         <!-- 카테고리 탭 -->
@@ -47,24 +40,28 @@
                 android:orientation="horizontal">
 
                 <Button
+                    android:id="@+id/btnFree"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="자유게시판"
                     android:textColor="@android:color/white" />
 
                 <Button
+                    android:id="@+id/btnMarket"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="중고 거래"
                     android:layout_marginStart="8dp" />
 
                 <Button
+                    android:id="@+id/btnProud"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="자녀 자랑 게시판"
                     android:layout_marginStart="8dp" />
 
                 <Button
+                    android:id="@+id/btnLocal"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="지역별 게시판"
@@ -73,13 +70,12 @@
         </HorizontalScrollView>
 
         <!-- 게시글 목록 -->
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recycler_board"
+        <FrameLayout
+            android:id="@+id/board_content_container"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1"
-            android:clipToPadding="false"
-            android:paddingBottom="80dp" />
+            android:layout_weight="1" />
+
     </LinearLayout>
 
     <!-- 글쓰기 버튼 (하단 고정) -->
