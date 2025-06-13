@@ -12,29 +12,38 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MomMaDang"
         tools:targetApi="31">
-
-        <!-- ✅ 앱 시작 화면을 SplashActivity로 설정 -->
+        <activity
+            android:name=".PostAdapter"
+            android:exported="false" />
+        <activity
+            android:name=".ProudBoardFragment"
+            android:exported="false" />
+        <activity
+            android:name=".LocalBoardFragment"
+            android:exported="false" />
+        <activity
+            android:name=".MarketBoardFragment"
+            android:exported="false" />
+        <activity
+            android:name=".FreeBoardFragment"
+            android:exported="false" /> <!-- ✅ 앱 시작 화면을 SplashActivity로 설정 -->
         <activity
             android:name=".SplashActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
-
-        <!--로그인 화면 키보드 올라올 시 입력창 안가려지게 올라감-->
+        </activity> <!-- 로그인 화면 키보드 올라올 시 입력창 안가려지게 올라감 -->
         <activity
             android:name=".LoginActivity"
-            android:windowSoftInputMode="adjustPan"/>
-
-        <!-- 나머지 Activity -->
+            android:windowSoftInputMode="adjustPan" /> <!-- 나머지 Activity -->
         <activity android:name=".MainActivity" />
-
         <activity
             android:name=".SignUpActivity"
-            android:windowSoftInputMode="adjustPan"/>
-
+            android:windowSoftInputMode="adjustPan" />
         <activity android:name=".BoardWriteActivity" />
     </application>
+
 </manifest>

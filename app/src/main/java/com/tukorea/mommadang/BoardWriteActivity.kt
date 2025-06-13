@@ -1,27 +1,84 @@
 package com.tukorea.mommadang
 
+import android.content.Intent
+import android.content.res.ColorStateList
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import com.tukorea.mommadang.databinding.ActivityBoardWriteBinding
 
 class BoardWriteActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityBoardWriteBinding
+    private var selectedCategory: String = "자유게시판" // 기본 카테고리
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityBoardWriteBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        // 카테고리 버튼 클릭 이벤트
+        binding.btnFree.setOnClickListener {
+            selectedCategory = "자유게시판"
+            updateCategorySelection(selectedCategory)
+        }
+
+        binding.btnMarket.setOnClickListener {
+            selectedCategory = "중고 거래"
+            updateCategorySelection(selectedCategory)
+        }
+
+        binding.btnProud.setOnClickListener {
+            selectedCategory = "자녀 자랑 게시판"
+            updateCategorySelection(selectedCategory)
+        }
+
+        binding.btnLocal.setOnClickListener {
+            selectedCategory = "지역별 게시판"
+            updateCategorySelection(selectedCategory)
+        }
+
+        // 등록 버튼 클릭
         binding.btnSubmit.setOnClickListener {
             val title = binding.editTitle.text.toString()
             val content = binding.editContent.text.toString()
 
-            // 등록 처리 (Firebase 연동 전이므로 임시 Toast 처리)
-            Toast.makeText(this, "제목: $title\n내용: $content", Toast.LENGTH_SHORT).show()
 
-            finish() // 작성 완료 후 종료
+            val resultIntent = Intent().apply {
+                putExtra("title", title)
+                putExtra("content", content)
+                putExtra("category", selectedCategory)
+            }
+            setResult(RESULT_OK, resultIntent)
+            finish()
+        }
+
+        // 기본 선택 상태 설정
+        updateCategorySelection(selectedCategory)
+    }
+
+    private fun updateCategorySelection(selected: String) {
+        val selectedColor = ContextCompat.getColor(this, R.color.Apricot)
+        val unselectedColor = ContextCompat.getColor(this, R.color.black)
+        val textColor = ContextCompat.getColor(this, R.color.white)
+
+        val allButtons = listOf(binding.btnFree, binding.btnMarket, binding.btnProud, binding.btnLocal)
+
+        allButtons.forEach { button ->
+            val isSelected = when (button) {
+                binding.btnFree -> selected == "자유게시판"
+                binding.btnMarket -> selected == "중고 거래"
+                binding.btnProud -> selected == "자녀 자랑 게시판"
+                binding.btnLocal -> selected == "지역별 게시판"
+                else -> false
+            }
+
+            button.backgroundTintList = ColorStateList.valueOf(
+                if (isSelected) selectedColor else unselectedColor
+            )
+            button.setTextColor(textColor)
         }
     }
+
 }

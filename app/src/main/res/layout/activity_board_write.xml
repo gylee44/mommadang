@@ -7,6 +7,7 @@
 
     <!-- 상단 제목 + 등록 버튼 -->
     <RelativeLayout
+        android:layout_marginTop="20dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="12dp">
@@ -19,7 +20,7 @@
             android:textStyle="bold" />
 
         <Button
-            android:id="@+id/btn_submit"
+            android:id="@+id/btnSubmit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="등록"
@@ -38,23 +39,27 @@
             android:orientation="horizontal">
 
             <Button
+                android:id="@+id/btnFree"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="자유게시판" />
 
             <Button
+                android:id="@+id/btnMarket"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="중고 거래"
                 android:layout_marginStart="8dp" />
 
             <Button
+                android:id="@+id/btnProud"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="자녀 자랑 게시판"
                 android:layout_marginStart="8dp" />
 
             <Button
+                android:id="@+id/btnLocal"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="지역별 게시판"
@@ -79,7 +84,6 @@
         android:id="@+id/editContent"
         android:hint="내용을 입력하세요."
         android:gravity="top"
-        android:background="@android:color/darker_gray"
         android:padding="12dp" />
 
     <!-- 하단 아이콘 (카메라, 위치) -->
