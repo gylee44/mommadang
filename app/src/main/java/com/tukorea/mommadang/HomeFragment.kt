@@ -21,8 +21,6 @@ class HomeFragment : Fragment() {
 
         // ▼ ▼ ▼ 클릭 이벤트 정의 ▼ ▼ ▼
 
-
-
         // 게시판 카드 클릭 → BoardFragment로 전환
         binding.boardCard.setOnClickListener {
             requireActivity().supportFragmentManager.beginTransaction()
@@ -31,6 +29,15 @@ class HomeFragment : Fragment() {
                 .commit()
         }
 
+        //미니맵 클릭 -> MapFragment로 전환
+        binding.miniMapView.setOnClickListener {
+            requireActivity().supportFragmentManager.beginTransaction()
+                .replace(R.id.container_main, MapFragment())
+                .addToBackStack(null)
+                .commit()
+        }
+        
+        
         // 내 정보 카드 클릭 → ProfileFragment로 전환
         binding.profileCard.setOnClickListener {
             requireActivity().supportFragmentManager.beginTransaction()

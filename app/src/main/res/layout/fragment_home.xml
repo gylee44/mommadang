@@ -1,4 +1,5 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
@@ -39,9 +40,9 @@
             android:layout_marginBottom="16dp">
 
             <TextView
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
+                android:id="@+id/day_of_the_week"
                 android:text="TUESDAY"
                 android:textSize="18sp"
                 android:textColor="#00B8D4" />
@@ -49,13 +50,25 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:id="@+id/temperature"
+                android:layout_weight="1"
+                android:gravity="end"
                 android:text="19℃"
                 android:textSize="18sp"
                 android:textColor="#00B8D4"
                 android:layout_marginHorizontal="12dp" />
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/fine_dust"
+                android:text="미세먼지"
+                android:textSize="18sp"
+                android:textColor="#00B8D4"
+                android:layout_marginHorizontal="12dp" />
+
             <ImageView
-                android:id="@+id/ic_weather_sun"
+                android:id="@+id/ic_weather"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:src="@drawable/ic_weather_sun" />
@@ -97,14 +110,11 @@
             android:weightSum="2">
 
             <!-- 지도 -->
-            <ImageView
+            <com.naver.maps.map.MapView
+                android:id="@+id/mini_map_view"
                 android:layout_width="0dp"
                 android:layout_height="120dp"
                 android:layout_weight="1"
-                android:src="@drawable/sample_map"
-
-                android:scaleType="centerCrop"
-                android:background="@drawable/bg_card_rounded"
                 android:layout_marginEnd="8dp" />
 
             <!-- 내 정보 -->
