@@ -44,7 +44,7 @@ android {
 }
 
 dependencies {
-    implementation("com.naver.maps:map-sdk:3.16.0")
+//    implementation("com.naver.maps:map-sdk:3.16.0")
     implementation("com.google.firebase:firebase-auth")
     implementation("com.google.firebase:firebase-database")
     implementation(platform("com.google.firebase:firebase-bom:33.14.0"))
