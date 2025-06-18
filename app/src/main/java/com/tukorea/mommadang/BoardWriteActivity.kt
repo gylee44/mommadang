@@ -41,9 +41,13 @@ class BoardWriteActivity : AppCompatActivity() {
 
         // 등록 버튼 클릭
         binding.btnSubmit.setOnClickListener {
-            val title = binding.editTitle.text.toString()
-            val content = binding.editContent.text.toString()
+            val title = binding.editTitle.text.toString().trim()
+            val content = binding.editContent.text.toString().trim()
 
+            if (title.isEmpty() || content.isEmpty()) {
+                Toast.makeText(this, "제목과 내용을 모두 입력해주세요.", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
 
             val resultIntent = Intent().apply {
                 putExtra("title", title)
@@ -54,7 +58,11 @@ class BoardWriteActivity : AppCompatActivity() {
             finish()
         }
 
-        // 기본 선택 상태 설정
+        binding.boardWritePhoto.setOnClickListener {
+            // 사진 등록 추가
+        }
+
+        // 기본 선택 상태 설정ㅡ
         updateCategorySelection(selectedCategory)
     }
 

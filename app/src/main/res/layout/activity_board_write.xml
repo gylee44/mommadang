@@ -97,6 +97,7 @@
         android:paddingEnd="16dp">
 
         <ImageView
+            android:id="@+id/board_write_photo"
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:src="@drawable/ic_camera"
