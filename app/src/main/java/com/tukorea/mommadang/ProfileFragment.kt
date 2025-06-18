@@ -35,6 +35,10 @@ class ProfileFragment : Fragment() {
                 val data: Intent? = result.data
                 val imageUri: Uri? = data?.data
                 if (imageUri != null) {
+                    // 1. 이미지 선택 후 바로 미리보기 표시
+                    Glide.with(this).load(imageUri).into(binding.imageProfile)
+
+                    // 2. 업로드
                     uploadProfileImage(imageUri)
                 } else {
                     Toast.makeText(context, "이미지를 가져오지 못했습니다.", Toast.LENGTH_SHORT).show()
@@ -53,7 +57,8 @@ class ProfileFragment : Fragment() {
         loadUserProfile()
 
         binding.imageProfile.setOnClickListener {
-            val intent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
+            val intent = Intent(Intent.ACTION_OPEN_DOCUMENT)
+            intent.addCategory(Intent.CATEGORY_OPENABLE)
             intent.type = "image/*"
             imagePickerLauncher.launch(intent)
         }
