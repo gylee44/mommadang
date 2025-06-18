@@ -7,6 +7,8 @@ import android.os.Bundle
 import android.provider.MediaStore
 import android.view.*
 import android.widget.Toast
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
 import com.google.firebase.auth.FirebaseAuth
@@ -20,7 +22,26 @@ class ProfileFragment : Fragment() {
     private val binding get() = _binding!!
 
     private lateinit var auth: FirebaseAuth
-    private val PICK_IMAGE_REQUEST = 1001
+    private lateinit var imagePickerLauncher: ActivityResultLauncher<Intent>
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        // 이미지 선택 결과 처리
+        imagePickerLauncher = registerForActivityResult(
+            ActivityResultContracts.StartActivityForResult()
+        ) { result ->
+            if (result.resultCode == Activity.RESULT_OK) {
+                val data: Intent? = result.data
+                val imageUri: Uri? = data?.data
+                if (imageUri != null) {
+                    uploadProfileImage(imageUri)
+                } else {
+                    Toast.makeText(context, "이미지를 가져오지 못했습니다.", Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -31,11 +52,10 @@ class ProfileFragment : Fragment() {
 
         loadUserProfile()
 
-        // 프로필 이미지 클릭 → 이미지 선택
         binding.imageProfile.setOnClickListener {
             val intent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
             intent.type = "image/*"
-            startActivityForResult(intent, PICK_IMAGE_REQUEST)
+            imagePickerLauncher.launch(intent)
         }
 
         return binding.root
@@ -43,11 +63,6 @@ class ProfileFragment : Fragment() {
 
     private fun loadUserProfile() {
         val uid = auth.currentUser?.uid ?: return
-
-        if (uid == null) {
-            Toast.makeText(context, "로그인 정보가 없습니다.", Toast.LENGTH_SHORT).show()
-            return
-        }
 
         val userRef = FirebaseDatabase.getInstance().getReference("Users").child(uid)
         userRef.get().addOnSuccessListener { snapshot ->
@@ -70,17 +85,6 @@ class ProfileFragment : Fragment() {
             }
         }.addOnFailureListener {
             Toast.makeText(context, "데이터 로드 실패: ${it.message}", Toast.LENGTH_SHORT).show()
-        }
-    }
-
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-
-        if (requestCode == PICK_IMAGE_REQUEST && resultCode == Activity.RESULT_OK && data != null) {
-            val imageUri: Uri? = data.data
-            imageUri?.let {
-                uploadProfileImage(it)
-            }
         }
     }
 
