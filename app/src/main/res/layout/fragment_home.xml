@@ -1,6 +1,7 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true">   <!--상태창 침범 X-->
 
     <LinearLayout
         android:id="@+id/fixed_header"
@@ -58,16 +59,14 @@
                 android:paddingEnd="24dp"
                 android:paddingBottom="24dp">
 
-                <!-- 행사 배너 -->
-                <ImageView
+                <!-- 행사 배너 캐러셀UI/하이퍼링크-->
+                <androidx.viewpager2.widget.ViewPager2
+                    android:id="@+id/viewPager"
                     android:layout_width="match_parent"
                     android:layout_height="180dp"
                     android:layout_marginBottom="20dp"
                     android:background="@drawable/bg_card_rounded"
-                    android:clipToOutline="true"
-                    android:scaleType="centerCrop"
-                    android:src="@drawable/sample_banner" />
-
+                    android:clipToOutline="true"/>
 
                 <!-- 날씨 카드 -->
                 <LinearLayout

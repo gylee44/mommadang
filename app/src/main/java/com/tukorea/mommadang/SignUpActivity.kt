@@ -118,6 +118,15 @@ class SignUpActivity : AppCompatActivity() {
                 }
         }
 
+        // 아이디 중복 확인하고 아이디 변경하였을 때 다시 확인
+        binding.editSignupId.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                isIdChecked = false
+            }
+            override fun afterTextChanged(s: Editable?) {}
+        })
+
         // 회원가입 버튼 클릭 리스너
         binding.btnSignup.setOnClickListener {
             val id = binding.editSignupId.text.toString().trim()

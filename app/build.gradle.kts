@@ -2,12 +2,12 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     id("com.google.gms.google-services")
-
+    id("kotlin-kapt")
 }
 
 android {
-    viewBinding{
-        enable = true
+    buildFeatures {
+        viewBinding = true
     }
 
 
@@ -58,4 +58,8 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
+    implementation("androidx.viewpager2:viewpager2:1.0.0")  // view2 사용
+    implementation("com.github.bumptech.glide:glide:4.16.0")    // Glide 사용
+    kapt("com.github.bumptech.glide:compiler:4.16.0")  // 코틀린 KAPT 사용 시
+    implementation("jp.wasabeef:glide-transformations:4.3.0")   // Glide의 사진 편집
 }
