@@ -13,7 +13,7 @@ class FreeBoardFragment : Fragment() {
     private var _binding: FragmentFreeBoardBinding? = null
     private val binding get() = _binding!!
 
-    private val postList = mutableListOf<Pair<String, String>>()
+    private val postList = mutableListOf<Triple<String, String, String>>() // title, content, author
     private lateinit var adapter: PostAdapter
 
     override fun onCreateView(
@@ -29,9 +29,8 @@ class FreeBoardFragment : Fragment() {
         return binding.root
     }
 
-    // 게시글 추가 함수 (BoardFragment에서 호출)
-    fun addPost(title: String, content: String) {
-        postList.add(0, title to content)
+    fun addPost(title: String, content: String, author: String) {
+        postList.add(0, Triple(title, content, author))
         adapter.notifyItemInserted(0)
         binding.recyclerViewFree.scrollToPosition(0)
     }

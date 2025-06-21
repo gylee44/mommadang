@@ -13,7 +13,7 @@ class ProudBoardFragment : Fragment() {
     private var _binding: FragmentProudBoardBinding? = null
     private val binding get() = _binding!!
 
-    private val postList = mutableListOf<Pair<String, String>>()
+    private val postList = mutableListOf<Triple<String, String, String>>()
     private lateinit var adapter: PostAdapter
 
     override fun onCreateView(
@@ -29,8 +29,8 @@ class ProudBoardFragment : Fragment() {
         return binding.root
     }
 
-    fun addPost(title: String, content: String) {
-        postList.add(0, title to content)
+    fun addPost(title: String, content: String, author: String) {
+        postList.add(0, Triple(title, content, author))
         adapter.notifyItemInserted(0)
         binding.recyclerViewProud.scrollToPosition(0)
     }

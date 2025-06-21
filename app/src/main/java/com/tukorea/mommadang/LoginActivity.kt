@@ -23,6 +23,7 @@ class LoginActivity : AppCompatActivity() {
 
         // 로그인 버튼 클릭 시 MainActivity 이동
         binding.btnLogin.setOnClickListener {
+
             val id = binding.editId.text.toString()
             val pw = binding.editPw.text.toString()
 
@@ -33,7 +34,12 @@ class LoginActivity : AppCompatActivity() {
                 return@setOnClickListener
             }
 
-            //성공 시
+
+            // 사용자 이름 저장 (예: id를 작성자로 사용)
+            val prefs = getSharedPreferences("user_prefs", MODE_PRIVATE)
+            prefs.edit().putString("user_name", id).apply()
+
+            //로그인 성공 시 메인 화면으로 이동
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
             finish()

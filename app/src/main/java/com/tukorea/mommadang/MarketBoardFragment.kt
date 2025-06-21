@@ -13,7 +13,7 @@ class MarketBoardFragment : Fragment() {
     private var _binding: FragmentMarketBoardBinding? = null
     private val binding get() = _binding!!
 
-    private val postList = mutableListOf<Pair<String, String>>()
+    private val postList = mutableListOf<Triple<String, String, String>>()
     private lateinit var adapter: PostAdapter
 
     override fun onCreateView(
@@ -29,8 +29,8 @@ class MarketBoardFragment : Fragment() {
         return binding.root
     }
 
-    fun addPost(title: String, content: String) {
-        postList.add(0, title to content)
+    fun addPost(title: String, content: String, author: String) {
+        postList.add(0, Triple(title, content, author))
         adapter.notifyItemInserted(0)
         binding.recyclerViewMarket.scrollToPosition(0)
     }
