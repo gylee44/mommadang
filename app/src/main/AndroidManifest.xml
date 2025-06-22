@@ -41,6 +41,7 @@
             android:name=".SignUpActivity"
             android:windowSoftInputMode="adjustPan" />
         <activity android:name=".BoardWriteActivity" />
+        <activity android:name=".PostDetailActivity" />
     </application>
 
 </manifest>

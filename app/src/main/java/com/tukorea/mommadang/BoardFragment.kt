@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.tukorea.mommadang.databinding.FragmentBoardBinding
@@ -33,12 +34,15 @@ class BoardFragment : Fragment() {
             val content = data?.getStringExtra("content")
             val category = data?.getStringExtra("category")
 
+            val prefs = requireActivity().getSharedPreferences("user_prefs", AppCompatActivity.MODE_PRIVATE)
+            val author = prefs.getString("user_name", "알 수 없음") ?: "알 수 없음"
+
             if (title != null && content != null && category != null) {
                 when (category) {
-                    "자유게시판" -> freeBoardFragment.addPost(title, content)
-                    "중고 거래" -> marketBoardFragment.addPost(title, content)
-                    "자녀 자랑 게시판" -> proudBoardFragment.addPost(title, content)
-                    "지역별 게시판" -> localBoardFragment.addPost(title, content)
+                    "자유게시판" -> freeBoardFragment.addPost(title, content, author)
+                    "중고 거래" -> marketBoardFragment.addPost(title, content, author)
+                    "자녀 자랑 게시판" -> proudBoardFragment.addPost(title, content, author)
+                    "지역별 게시판" -> localBoardFragment.addPost(title, content, author)
                 }
             }
         }

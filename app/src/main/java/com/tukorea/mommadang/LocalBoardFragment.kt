@@ -18,9 +18,10 @@ class LocalBoardFragment : Fragment() {
     private var _binding: FragmentFreeBoardBinding? = null
     private val binding get() = _binding!!
 
-    private val postList = mutableListOf<Pair<String, String>>()
+    private val postList = mutableListOf<Triple<String, String, String>>() // title, content, author
     private lateinit var adapter: PostAdapter
     private val db = FirebaseFirestore.getInstance()
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -38,10 +39,11 @@ class LocalBoardFragment : Fragment() {
         return binding.root
     }
 
-    fun addPost(title: String, content: String) {
+    fun addPost(title: String, content: String, author: String) {
         val post = hashMapOf(
             "title" to title,
             "content" to content,
+            "author" to author,
             "category" to "지역별 게시판",
             "timestamp" to System.currentTimeMillis()
         )
@@ -49,7 +51,7 @@ class LocalBoardFragment : Fragment() {
         db.collection("posts")
             .add(post)
             .addOnSuccessListener {
-                postList.add(0, title to content)
+                postList.add(0, Triple(title, content, author))
                 adapter.notifyItemInserted(0)
                 binding.recyclerViewFree.scrollToPosition(0)
             }
@@ -70,7 +72,8 @@ class LocalBoardFragment : Fragment() {
                 for (document in result) {
                     val title = document.getString("title") ?: ""
                     val content = document.getString("content") ?: ""
-                    postList.add(title to content)
+                    val author = document.getString("author") ?: "익명"
+                    postList.add(Triple(title, content, author))
                 }
                 adapter.notifyDataSetChanged()
             }
