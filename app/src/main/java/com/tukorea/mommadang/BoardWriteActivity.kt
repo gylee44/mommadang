@@ -7,11 +7,56 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.tukorea.mommadang.databinding.ActivityBoardWriteBinding
+import android.text.SpannableStringBuilder
+import android.text.Spanned
+import android.text.style.ImageSpan
+import android.graphics.drawable.Drawable
+import android.net.Uri
+import androidx.activity.result.contract.ActivityResultContracts
 
 class BoardWriteActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityBoardWriteBinding
     private var selectedCategory: String = "자유게시판" // 기본 카테고리
+
+    // 사진
+    private var selectedImageUri: Uri? = null
+
+    // 사진 선택 결과 처리 런처 등록
+    private val pickImageLauncher = registerForActivityResult(
+        ActivityResultContracts.GetContent()
+    ) { uri: Uri? ->
+        if (uri != null) {
+            selectedImageUri = uri
+
+            // 선택한 이미지 Uri에서 Drawable 생성 후 editContent에 이미지 삽입 (수정된 부분)
+            val inputStream = contentResolver.openInputStream(uri)
+            val drawable = Drawable.createFromStream(inputStream, uri.toString())
+            inputStream?.close()
+
+            drawable?.let {
+                // 이미지 크기 조절 (높이 200px 기준)
+                val height = 600
+                val ratio = it.intrinsicWidth.toFloat() / it.intrinsicHeight
+                val width = (height * ratio).toInt()
+                it.setBounds(0, 0, width, height)
+
+                // ImageSpan 생성
+                val imageSpan = ImageSpan(it, ImageSpan.ALIGN_BASELINE)
+
+                // SpannableStringBuilder에 이미지 추가
+                val ssb = SpannableStringBuilder(binding.editContent.text)
+                val cursorPos = binding.editContent.selectionStart
+                ssb.insert(cursorPos, "￼") // 이미지 자리 표시 특수문자
+                ssb.setSpan(imageSpan, cursorPos, cursorPos + 1, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
+
+                // EditText에 반영
+                binding.editContent.setText(ssb)
+                binding.editContent.setSelection(cursorPos + 1)
+            }
+        }
+    }
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -53,13 +98,17 @@ class BoardWriteActivity : AppCompatActivity() {
                 putExtra("title", title)
                 putExtra("content", content)
                 putExtra("category", selectedCategory)
+                // 선택한 이미지 URI 전달 (문자열 형태)
+                selectedImageUri?.let {
+                    putExtra("imageUri", it.toString())
+                }
             }
             setResult(RESULT_OK, resultIntent)
             finish()
         }
 
         binding.boardWritePhoto.setOnClickListener {
-            // 사진 등록 추가
+            pickImageLauncher.launch("image/*") // 사진 선택 (수정된 부분: 사진 선택 시 바로 EditText에 삽입)
         }
 
         // 기본 선택 상태 설정ㅡ
