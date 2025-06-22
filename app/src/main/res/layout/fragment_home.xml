@@ -1,4 +1,5 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true">   <!--상태창 침범 X-->
@@ -60,188 +61,228 @@
                 android:paddingBottom="24dp">
 
                 <!-- 행사 배너 캐러셀UI/하이퍼링크-->
-                <androidx.viewpager2.widget.ViewPager2
-                    android:id="@+id/viewPager"
+                <com.google.android.material.card.MaterialCardView
                     android:layout_width="match_parent"
                     android:layout_height="180dp"
                     android:layout_marginBottom="20dp"
+                    app:cardCornerRadius="16dp"
+                    app:cardElevation="4dp"
+                    app:cardBackgroundColor="@android:color/transparent">
+
+                <androidx.viewpager2.widget.ViewPager2
+                    android:id="@+id/viewPager"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
                     android:background="@drawable/bg_card_rounded"
-                    android:clipToOutline="true"/>
+                    android:clipToOutline="true" />
+                </com.google.android.material.card.MaterialCardView>
 
                 <!-- 날씨 카드 -->
-                <LinearLayout
+                <com.google.android.material.card.MaterialCardView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="16dp"
-                    android:background="@drawable/bg_card_rounded"
-                    android:clipToOutline="true"
-                    android:orientation="vertical"
-                    android:padding="16dp">
-
-                    <TextView
-                        android:id="@+id/day_of_the_week"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="TUESDAY"
-                        android:textColor="@color/textColor1"
-                        android:textSize="20sp"
-                        android:textStyle="bold" />
+                    android:layout_marginHorizontal="0dp"
+                    android:layout_marginBottom="28dp"
+                    app:cardBackgroundColor="@android:color/transparent"
+                    app:cardCornerRadius="32dp"
+                    app:cardElevation="4dp"
+                    app:strokeWidth="0dp">
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
-                        android:gravity="center_vertical"
-                        android:orientation="horizontal">
-
-                        <!-- ✅ 미세먼지 정보 묶음 -->
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginHorizontal="12dp"
-                            android:orientation="vertical">
-
-                            <TextView
-                                android:id="@+id/fine_dust"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-
-                                android:text="미세먼지"
-                                android:textColor="@color/textColor2"
-                                android:textSize="18sp" />
-
-                            <TextView
-                                android:id="@+id/fine_dust_value"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="2dp"
-                                android:text="PM10: 34㎍/㎥"
-                                android:textColor="@color/textColor2"
-                                android:textSize="14sp" />
-                        </LinearLayout>
+                        android:background="@drawable/bg_weather_sun"
+                        android:clipToOutline="true"
+                        android:orientation="vertical"
+                        android:padding="16dp">
 
                         <TextView
-                            android:id="@+id/temperature"
+                            android:id="@+id/day_of_the_week"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginHorizontal="12dp"
-                            android:layout_weight="1"
-                            android:gravity="end"
-                            android:paddingRight="8dp"
-                            android:text="19℃"
+                            android:layout_marginStart="4dp"
+                            android:text="TUESDAY"
                             android:textColor="@color/textColor1"
-                            android:textSize="48sp" />
+                            android:letterSpacing="0.03"
+                            android:textSize="23sp" />
 
-                        <ImageView
-                            android:id="@+id/ic_weather"
-                            android:layout_width="50dp"
-                            android:layout_height="50dp"
-                            android:src="@drawable/ic_weather_sun" />
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal">
+
+                            <!-- 미세먼지 정보 묶음 -->
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="4dp"
+                                android:layout_marginHorizontal="12dp"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:id="@+id/fine_dust"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="미세먼지"
+                                    android:textColor="@color/textColor3_sun"
+                                    android:textSize="16sp" />
+
+                                <TextView
+                                    android:id="@+id/fine_dust_value"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="2dp"
+                                    android:text="PM10: 34㎍/㎥"
+                                    android:textStyle="bold"
+                                    android:textColor="@color/textColor3_sun"
+                                    android:textSize="14sp" />
+                            </LinearLayout>
+
+                            <TextView
+                                android:id="@+id/temperature"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginHorizontal="12dp"
+                                android:layout_weight="1"
+                                android:gravity="end"
+                                android:paddingRight="8dp"
+                                android:text="19℃"
+                                android:textColor="@color/textColor1"
+                                android:textSize="48sp" />
+
+                            <ImageView
+                                android:id="@+id/ic_weather"
+                                android:layout_width="50dp"
+                                android:layout_height="50dp"
+                                android:src="@drawable/ic_weather_sun" />
+                        </LinearLayout>
+
                     </LinearLayout>
-
-                </LinearLayout>
-
+                </com.google.android.material.card.MaterialCardView>
                 <!-- 게시판 카드 -->
-                <LinearLayout
+                <com.google.android.material.card.MaterialCardView
                     android:id="@+id/boardCard"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="16dp"
-                    android:background="@drawable/bg_card_rounded"
-                    android:clipToOutline="true"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal"
-                    android:padding="16dp">
+                    android:layout_marginHorizontal="0dp"
+                    android:layout_marginBottom="24dp"
+                    app:cardBackgroundColor="@color/cardColor"
+                    app:cardCornerRadius="16dp"
+                    app:cardElevation="4dp"
+                    app:strokeColor="#E0DAD1"
+                    app:strokeWidth="1dp">
 
                     <LinearLayout
-                        android:layout_width="0dp"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_weight="2"
-                        android:orientation="vertical">
+                        android:clipToOutline="true"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:padding="16dp">
 
-                        <TextView
-                            android:layout_width="wrap_content"
+                        <LinearLayout
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:text="게시판"
-                            android:textColor="#211808"
-                            android:textSize="20sp"
-                            android:textStyle="bold" />
+                            android:layout_weight="2"
+                            android:orientation="vertical">
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="4dp"
-                            android:text="주변 사람들과 함께 소통해요"
-                            android:textColor="#b4872d"
-                            android:textSize="14sp" />
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="게시판"
+                                android:textColor="#211808"
+                                android:textSize="20sp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="4dp"
+                                android:text="주변 사람들과 함께 소통해요"
+                                android:textColor="#b4872d"
+                                android:textSize="14sp" />
+
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="16dp"
+                                android:contentDescription="게시판 이동 버튼"
+                                android:src="@drawable/openbutton" />
+
+
+                        </LinearLayout>
 
                         <ImageView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="16dp"
-                            android:contentDescription="게시판 이동 버튼"
-                            android:src="@drawable/openbutton" />
-
-
+                            android:contentDescription="게시판"
+                            android:src="@drawable/board" />
                     </LinearLayout>
-
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:contentDescription="게시판"
-                        android:src="@drawable/board" />
-                </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
 
                 <!--            내 정보 카드-->
-                <LinearLayout
+                <com.google.android.material.card.MaterialCardView
                     android:id="@+id/profileCard"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="16dp"
-                    android:background="@drawable/bg_card_rounded"
-                    android:clipToOutline="true"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal"
-                    android:padding="16dp">
+                    android:layout_marginHorizontal="0dp"
+                    android:layout_marginBottom="24dp"
+                    app:cardBackgroundColor="@color/cardColor"
+                    app:cardCornerRadius="16dp"
+                    app:cardElevation="4dp"
+                    app:strokeColor="#E0DAD1"
+                    app:strokeWidth="1dp">
 
                     <LinearLayout
-                        android:layout_width="0dp"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_weight="2"
-                        android:orientation="vertical">
+                        android:clipToOutline="true"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:padding="16dp">
 
-                        <TextView
-                            android:layout_width="wrap_content"
+                        <LinearLayout
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="4dp"
-                            android:text="프로필"
-                            android:textColor="@color/textColor1"
-                            android:textSize="20sp"
-                            android:textStyle="bold" />
+                            android:layout_weight="2"
+                            android:orientation="vertical">
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="4dp"
-                            android:text="내 정보 확인"
-                            android:textColor="#b4872d"
-                            android:textSize="14sp" />
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="4dp"
+                                android:text="프로필"
+                                android:textColor="@color/textColor1"
+                                android:textSize="20sp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="4dp"
+                                android:text="내 정보 확인"
+                                android:textColor="#b4872d"
+                                android:textSize="14sp" />
+
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="16dp"
+                                android:contentDescription="게시판 이동 버튼"
+                                android:src="@drawable/viewbutton" />
+                        </LinearLayout>
 
                         <ImageView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="16dp"
-                            android:contentDescription="게시판 이동 버튼"
-                            android:src="@drawable/viewbutton" />
+                            android:contentDescription="내 정보"
+                            android:src="@drawable/profile_photo" />
+
                     </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
 
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:contentDescription="내 정보"
-                        android:src="@drawable/profile_photo" />
-
-                </LinearLayout>
                 <!-- 지도 -->
 
                 <!--            니중에 ImageView 삭제 후 미니맵으로 변경-->
