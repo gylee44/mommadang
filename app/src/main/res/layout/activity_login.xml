@@ -11,7 +11,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#F5F5F5"
+        android:background="@color/backgroundColor"
         android:gravity="center"
         android:orientation="vertical"
         android:padding="50dp">
@@ -27,9 +27,10 @@
 
         <!--    카드 형태 박스 (입력폼 감싼거)-->
         <androidx.cardview.widget.CardView
-            android:layout_width="320dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
+            android:layout_marginHorizontal="8dp"
             android:background="@android:color/white"
             app:cardCornerRadius="16dp"
             app:cardElevation="3dp">
@@ -38,7 +39,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:padding="24dp">
+                android:paddingLeft="24dp"
+                android:paddingTop="24dp"
+                android:paddingRight="24dp"
+                android:paddingBottom="8dp">
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
@@ -101,7 +105,8 @@
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btn_login"
             style="@style/MyLoginButtonStyle"
-            android:layout_width="320dp"
+            android:layout_width="match_parent"
+            android:layout_marginHorizontal="8dp"
             android:layout_height="48dp"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="16dp"

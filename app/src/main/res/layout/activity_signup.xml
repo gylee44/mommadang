@@ -1,8 +1,8 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:background="#F5F5F5">
+    android:layout_height="match_parent"
+    android:background="@color/backgroundColor">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -14,7 +14,8 @@
 
         <!-- 타이틀 + 이미지 -->
         <LinearLayout
-            android:layout_width="340dp"
+            android:layout_width="match_parent"
+            android:layout_marginHorizontal="16dp"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:paddingHorizontal="8dp"
@@ -41,7 +42,8 @@
 
         <!--    카드 형태 박스 (입력폼 감싼거)-->
         <androidx.cardview.widget.CardView
-            android:layout_width="340dp"
+            android:layout_width="match_parent"
+            android:layout_marginHorizontal="16dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:background="@android:color/white"

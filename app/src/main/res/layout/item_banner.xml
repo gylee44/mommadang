@@ -1,0 +1,13 @@
+<!-- 최상위 뷰 예시 (ConstraintLayout 또는 FrameLayout 등) -->
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/bannerImage"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        android:src="@drawable/sample_banner" />
+
+</FrameLayout>
