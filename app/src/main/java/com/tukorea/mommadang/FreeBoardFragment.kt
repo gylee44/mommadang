@@ -17,7 +17,7 @@ class FreeBoardFragment : Fragment() {
     private var _binding: FragmentFreeBoardBinding? = null
     private val binding get() = _binding!!
 
-    private val postList = mutableListOf<Triple<String, String, String>>() // title, content, author
+    private val postList = mutableListOf<Post>() // title, content, author, timestamp
     private lateinit var adapter: PostAdapter
     private val db = FirebaseFirestore.getInstance()
 
@@ -39,18 +39,19 @@ class FreeBoardFragment : Fragment() {
 
     // Firestore에 게시글 저장 및 목록에 추가
     fun addPost(title: String, content: String, author: String) {
+        val timestamp = System.currentTimeMillis()
         val post = hashMapOf(
             "title" to title,
             "content" to content,
             "author" to author,
             "category" to "자유게시판",
-            "timestamp" to System.currentTimeMillis()
+            "timestamp" to timestamp
         )
 
         db.collection("posts")
             .add(post)
             .addOnSuccessListener {
-                postList.add(0, Triple(title, content, author))
+                postList.add(0, Post(title, content, author, timestamp))
                 adapter.notifyItemInserted(0)
                 binding.recyclerViewFree.scrollToPosition(0)
             }
@@ -72,7 +73,8 @@ class FreeBoardFragment : Fragment() {
                     val title = document.getString("title") ?: ""
                     val content = document.getString("content") ?: ""
                     val author = document.getString("author") ?: "익명"
-                    postList.add(Triple(title, content, author))
+                    val timestamp = document.getLong("timestamp") ?: 0L
+                    postList.add(Post(title, content, author, timestamp))
                 }
                 adapter.notifyDataSetChanged()
             }

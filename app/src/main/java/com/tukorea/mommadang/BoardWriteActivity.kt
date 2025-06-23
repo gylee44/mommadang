@@ -79,8 +79,8 @@ class BoardWriteActivity : AppCompatActivity() {
             updateCategorySelection(selectedCategory)
         }
 
-        binding.btnLocal.setOnClickListener {
-            selectedCategory = "지역별 게시판"
+        binding.btnInfo.setOnClickListener {
+            selectedCategory = "정보 게시판"
             updateCategorySelection(selectedCategory)
         }
 
@@ -120,14 +120,14 @@ class BoardWriteActivity : AppCompatActivity() {
         val unselectedColor = ContextCompat.getColor(this, R.color.black)
         val textColor = ContextCompat.getColor(this, R.color.white)
 
-        val allButtons = listOf(binding.btnFree, binding.btnMarket, binding.btnProud, binding.btnLocal)
+        val allButtons = listOf(binding.btnFree, binding.btnMarket, binding.btnProud, binding.btnInfo)
 
         allButtons.forEach { button ->
             val isSelected = when (button) {
                 binding.btnFree -> selected == "자유게시판"
                 binding.btnMarket -> selected == "중고 거래"
                 binding.btnProud -> selected == "자녀 자랑 게시판"
-                binding.btnLocal -> selected == "지역별 게시판"
+                binding.btnInfo -> selected == "정보 게시판"
                 else -> false
             }
 

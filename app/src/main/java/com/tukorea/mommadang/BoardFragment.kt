@@ -21,7 +21,7 @@ class BoardFragment : Fragment() {
     private val freeBoardFragment = FreeBoardFragment()
     private val marketBoardFragment = MarketBoardFragment()
     private val proudBoardFragment = ProudBoardFragment()
-    private val localBoardFragment = LocalBoardFragment()
+    private val infoBoardFragment = InfoBoardFragment()
 
     private var selectedCategory: String = "자유게시판"
 
@@ -42,7 +42,7 @@ class BoardFragment : Fragment() {
                     "자유게시판" -> freeBoardFragment.addPost(title, content, author)
                     "중고 거래" -> marketBoardFragment.addPost(title, content, author)
                     "자녀 자랑 게시판" -> proudBoardFragment.addPost(title, content, author)
-                    "지역별 게시판" -> localBoardFragment.addPost(title, content, author)
+                    "정보 게시판" -> infoBoardFragment.addPost(title, content, author)
                 }
             }
         }
@@ -85,11 +85,11 @@ class BoardFragment : Fragment() {
                 .commit()
         }
 
-        binding.btnLocal.setOnClickListener {
-            selectedCategory = "지역별 게시판"
+        binding.btnInfo.setOnClickListener {
+            selectedCategory = "정보 게시판"
             updateCategorySelection()
             childFragmentManager.beginTransaction()
-                .replace(R.id.board_content_container, localBoardFragment)
+                .replace(R.id.board_content_container, infoBoardFragment)
                 .commit()
         }
 
@@ -106,24 +106,33 @@ class BoardFragment : Fragment() {
 
     private fun updateCategorySelection() {
         val selectedColor = ContextCompat.getColor(requireContext(), R.color.Apricot)
-        val unselectedColor = ContextCompat.getColor(requireContext(), R.color.black)
-        val textColor = ContextCompat.getColor(requireContext(), R.color.white)
+        val unselectedColor = ContextCompat.getColor(requireContext(), R.color.cardColor)
+        val activeTextColor = ContextCompat.getColor(requireContext(), R.color.bt_click_textColor)
+        val inactiveTextColor = ContextCompat.getColor(requireContext(), R.color.textColor1)
 
-        val allButtons = listOf(binding.btnFree, binding.btnMarket, binding.btnProud, binding.btnLocal)
+        val allButtons = listOf(binding.btnFree, binding.btnMarket, binding.btnProud, binding.btnInfo)
 
         allButtons.forEach { button ->
             val isSelected = when (button) {
                 binding.btnFree -> selectedCategory == "자유게시판"
                 binding.btnMarket -> selectedCategory == "중고 거래"
                 binding.btnProud -> selectedCategory == "자녀 자랑 게시판"
-                binding.btnLocal -> selectedCategory == "지역별 게시판"
+                binding.btnInfo -> selectedCategory == "정보 게시판"
                 else -> false
             }
 
             button.backgroundTintList = ColorStateList.valueOf(
                 if (isSelected) selectedColor else unselectedColor
             )
-            button.setTextColor(textColor)
+            button.setTextColor(
+                if (isSelected) activeTextColor
+                else inactiveTextColor
+            )
+            //버튼 fade 효과
+            button.animate()
+                .alpha(if (isSelected) 1f else 0.5f) // 선택된 버튼은 뚜렷하게, 나머지는 흐리게
+                .setDuration(200)
+                .start()
         }
     }
 

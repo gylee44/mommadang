@@ -10,5 +10,7 @@
     <color name="textColor3_rain">#4B6282</color>
     <color name="headerColor">#e4dac1</color>
     <color name="cardColor">#FAF7F0</color>
+    <color name="bt_click_textColor">#48301c</color>
+    <color name="strokeColor">#E0DAD1</color>
 
 </resources>

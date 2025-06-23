@@ -18,7 +18,7 @@ class ProudBoardFragment : Fragment() {
     private var _binding: FragmentFreeBoardBinding? = null
     private val binding get() = _binding!!
 
-    private val postList = mutableListOf<Triple<String, String, String>>() // title, content, author
+    private val postList = mutableListOf<Post>() // title, content, author, timestamp
     private lateinit var adapter: PostAdapter
     private val db = FirebaseFirestore.getInstance()
 
@@ -39,18 +39,19 @@ class ProudBoardFragment : Fragment() {
     }
 
     fun addPost(title: String, content: String, author: String) {
+        val timestamp = System.currentTimeMillis()
         val post = hashMapOf(
             "title" to title,
             "content" to content,
             "author" to author,
             "category" to "지역별 게시판",
-            "timestamp" to System.currentTimeMillis()
+            "timestamp" to timestamp
         )
 
         db.collection("posts")
             .add(post)
             .addOnSuccessListener {
-                postList.add(0, Triple(title, content, author))
+                postList.add(0, Post(title, content, author, timestamp))
                 adapter.notifyItemInserted(0)
                 binding.recyclerViewFree.scrollToPosition(0)
             }
@@ -63,7 +64,7 @@ class ProudBoardFragment : Fragment() {
     // Firestore에서 게시글 불러오기
     private fun loadPosts() {
         db.collection("posts")
-            .whereEqualTo("category", "지역별 게시판")
+            .whereEqualTo("category", "자녀 자랑 게시판")
             .orderBy("timestamp", Query.Direction.DESCENDING)
             .get()
             .addOnSuccessListener { result ->
@@ -72,7 +73,8 @@ class ProudBoardFragment : Fragment() {
                     val title = document.getString("title") ?: ""
                     val content = document.getString("content") ?: ""
                     val author = document.getString("author") ?: "익명"
-                    postList.add(Triple(title, content, author))
+                    val timestamp = document.getLong("timestamp") ?: 0L
+                    postList.add(Post(title, content, author, timestamp))
                 }
                 adapter.notifyDataSetChanged()
             }

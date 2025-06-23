@@ -1,33 +1,61 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:backgroundTint="@color/cardColor"
     android:orientation="vertical"
     android:paddingTop="12dp"
     android:paddingBottom="12dp"
-    android:background="#FFFFFF">
+    android:layout_marginBottom="12dp"
+    android:layout_marginTop="4dp"
+    app:cardCornerRadius="12dp"
+    app:cardElevation="2dp"
+    app:strokeColor="@color/strokeColor"
+    app:strokeWidth="1dp">
 
-    <TextView
-        android:id="@+id/itemTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="제목"
-        android:textStyle="bold"
-        android:textSize="16sp" />
-
-    <TextView
-        android:id="@+id/itemContent"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="내용"
-        android:textSize="14sp"
-        android:layout_marginTop="4dp" />
-
-    <!-- 구분선: 좌우 padding 없이 화면 전체 너비 -->
-    <View
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="#222222"
-        android:layout_marginTop="12dp"
-        android:layout_marginHorizontal="0dp" />
-</LinearLayout>
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <TextView
+            android:id="@+id/itemTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="제목"
+            android:textColor="@color/textColor1"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/itemContent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:ellipsize="end"
+            android:maxLines="3"
+            android:text="내용"
+            android:textSize="14sp" />
+
+        <!-- 구분선: 좌우 padding 없이 화면 전체 너비 -->
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginHorizontal="0dp"
+            android:layout_marginTop="12dp"
+            android:background="#E4DAC1" />
+
+        <TextView
+            android:id="@+id/itemAuthor"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="익명 · 00분 전"
+            android:textSize="12sp"
+            android:textColor="@android:color/darker_gray"
+            android:gravity="start"
+            android:layout_marginBottom="4dp" />
+
+    </LinearLayout>
+</com.google.android.material.card.MaterialCardView>
