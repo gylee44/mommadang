@@ -110,17 +110,11 @@
             android:weightSum="2">
 
             <!-- 지도 -->
-
-<!--            니중에 ImageView 삭제 후 미니맵으로 변경-->
-<!--            <com.naver.maps.map.MapView-->
-
-            <ImageView
-                android:id="@+id/mini_map_view"
+            <FrameLayout
+                android:id="@+id/map_fragment_container"
                 android:layout_width="0dp"
                 android:layout_height="120dp"
-                android:layout_marginEnd="8dp"
-                android:layout_weight="1"
-                android:src="@drawable/sample_map" />
+                android:layout_weight="1" />
 
             <!-- 내 정보 -->
             <LinearLayout
