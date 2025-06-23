@@ -18,7 +18,7 @@ class FreeBoardFragment : Fragment() {
     private val binding get() = _binding!!
 
     private val postList = mutableListOf<Post>() // title, content, author, timestamp
-    private lateinit var adapter: PostAdapter
+    private var adapter: PostAdapter? = null
     private val db = FirebaseFirestore.getInstance()
 
     override fun onCreateView(
@@ -36,6 +36,10 @@ class FreeBoardFragment : Fragment() {
 
         return binding.root
     }
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
 
     // Firestore에 게시글 저장 및 목록에 추가
     fun addPost(title: String, content: String, author: String) {
@@ -52,8 +56,10 @@ class FreeBoardFragment : Fragment() {
             .add(post)
             .addOnSuccessListener {
                 postList.add(0, Post(title, content, author, timestamp))
-                adapter.notifyItemInserted(0)
-                binding.recyclerViewFree.scrollToPosition(0)
+                adapter?.notifyItemInserted(0)
+                if (isAdded && view != null) {
+                    binding.recyclerViewFree.scrollToPosition(0)
+                }
             }
             .addOnFailureListener {
                 Toast.makeText(requireContext(), "게시글 등록 실패: ${it.message}", Toast.LENGTH_SHORT).show()
@@ -76,7 +82,7 @@ class FreeBoardFragment : Fragment() {
                     val timestamp = document.getLong("timestamp") ?: 0L
                     postList.add(Post(title, content, author, timestamp))
                 }
-                adapter.notifyDataSetChanged()
+                adapter?.notifyDataSetChanged()
             }
             .addOnFailureListener {
                 Toast.makeText(requireContext(), "게시글 불러오기 실패", Toast.LENGTH_SHORT).show()
@@ -84,8 +90,5 @@ class FreeBoardFragment : Fragment() {
             }
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
-    }
+
 }

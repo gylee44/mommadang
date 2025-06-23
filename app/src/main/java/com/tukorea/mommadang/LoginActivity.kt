@@ -38,14 +38,28 @@ class LoginActivity : AppCompatActivity() {
             auth.signInWithEmailAndPassword(email, pw)
                 .addOnCompleteListener(this) { task ->
                     if (task.isSuccessful) {
-                        // 로그인 성공 → 메인 화면으로 이동
-                        Toast.makeText(this, "로그인 성공", Toast.LENGTH_SHORT).show()
-                        val intent = Intent(this, MainActivity::class.java)
-                        startActivity(intent)
-                        finish()
-                    } else {
-                        // 로그인 실패 → 오류 메시지 출력
-                        Toast.makeText(this, "로그인 실패: ${task.exception?.message}", Toast.LENGTH_SHORT).show()
+                        // 사용자 이름을 Firebase에서 가져와 SharedPreferences에 저장
+                        val uid = auth.currentUser?.uid ?: return@addOnCompleteListener
+                        val userRef = com.google.firebase.database.FirebaseDatabase.getInstance()
+                            .getReference("Users")
+                            .child(uid)
+
+                        userRef.get().addOnSuccessListener { snapshot ->
+                            val userName =
+                                snapshot.child("name").getValue(String::class.java) ?: "알 수 없음"
+
+                            // SharedPreferences 저장
+                            val prefs = getSharedPreferences("user_prefs", MODE_PRIVATE)
+                            prefs.edit().putString("user_name", userName).apply()
+
+                            // 로그인 성공 → 메인 화면으로 이동
+                            Toast.makeText(this, "로그인 성공", Toast.LENGTH_SHORT).show()
+                            val intent = Intent(this, MainActivity::class.java)
+                            startActivity(intent)
+                            finish()
+                        }.addOnFailureListener {
+                            Toast.makeText(this, "사용자 정보 로드 실패", Toast.LENGTH_SHORT).show()
+                        }
                     }
                 }
         }
