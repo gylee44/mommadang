@@ -10,16 +10,16 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
-import com.tukorea.mommadang.databinding.FragmentFreeBoardBinding
+import com.tukorea.mommadang.databinding.FragmentInfoBoardBinding
 
 
 class InfoBoardFragment : Fragment() {
 
-    private var _binding: FragmentFreeBoardBinding? = null
+    private var _binding: FragmentInfoBoardBinding? = null
     private val binding get() = _binding!!
 
     private val postList = mutableListOf<Post>() // title, content, author, timestamp
-    private lateinit var adapter: PostAdapter
+    private var adapter: PostAdapter? = null
     private val db = FirebaseFirestore.getInstance()
 
 
@@ -27,16 +27,21 @@ class InfoBoardFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentFreeBoardBinding.inflate(inflater, container, false)
+        _binding = FragmentInfoBoardBinding.inflate(inflater, container, false)
 
         adapter = PostAdapter(postList)
-        binding.recyclerViewFree.layoutManager = LinearLayoutManager(requireContext())
-        binding.recyclerViewFree.adapter = adapter
+        binding.recyclerViewInfo.layoutManager = LinearLayoutManager(requireContext())
+        binding.recyclerViewInfo.adapter = adapter
 
         // Firestore에서 게시글 불러오기
         loadPosts()
 
         return binding.root
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
     fun addPost(title: String, content: String, author: String) {
@@ -45,7 +50,7 @@ class InfoBoardFragment : Fragment() {
             "title" to title,
             "content" to content,
             "author" to author,
-            "category" to "지역별 게시판",
+            "category" to "정보 게시판",
             "timestamp" to timestamp
         )
 
@@ -53,8 +58,10 @@ class InfoBoardFragment : Fragment() {
             .add(post)
             .addOnSuccessListener {
                 postList.add(0, Post(title, content, author, timestamp))
-                adapter.notifyItemInserted(0)
-                binding.recyclerViewFree.scrollToPosition(0)
+                adapter?.notifyItemInserted(0)
+                if (isAdded && view != null) {
+                    binding.recyclerViewInfo.scrollToPosition(0)
+                }
             }
             .addOnFailureListener {
                 Toast.makeText(requireContext(), "게시글 등록 실패: ${it.message}", Toast.LENGTH_SHORT).show()
@@ -65,7 +72,7 @@ class InfoBoardFragment : Fragment() {
     // Firestore에서 게시글 불러오기
     private fun loadPosts() {
         db.collection("posts")
-            .whereEqualTo("category", "지역별 게시판")
+            .whereEqualTo("category", "정보 게시판")
             .orderBy("timestamp", Query.Direction.DESCENDING)
             .get()
             .addOnSuccessListener { result ->
@@ -77,7 +84,7 @@ class InfoBoardFragment : Fragment() {
                     val timestamp = document.getLong("timestamp") ?: 0L
                     postList.add(Post(title, content, author, timestamp))
                 }
-                adapter.notifyDataSetChanged()
+                adapter?.notifyDataSetChanged()
             }
             .addOnFailureListener {
                 Toast.makeText(requireContext(), "게시글 불러오기 실패", Toast.LENGTH_SHORT).show()
@@ -85,8 +92,5 @@ class InfoBoardFragment : Fragment() {
             }
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
-    }
+
 }

@@ -10,32 +10,37 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
-import com.tukorea.mommadang.databinding.FragmentFreeBoardBinding
+import com.tukorea.mommadang.databinding.FragmentProudBoardBinding
 
 
 class ProudBoardFragment : Fragment() {
 
-    private var _binding: FragmentFreeBoardBinding? = null
+    private var _binding: FragmentProudBoardBinding? = null
     private val binding get() = _binding!!
 
     private val postList = mutableListOf<Post>() // title, content, author, timestamp
-    private lateinit var adapter: PostAdapter
+    private var adapter: PostAdapter? = null
     private val db = FirebaseFirestore.getInstance()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentFreeBoardBinding.inflate(inflater, container, false)
+        _binding = FragmentProudBoardBinding.inflate(inflater, container, false)
 
         adapter = PostAdapter(postList)
-        binding.recyclerViewFree.layoutManager = LinearLayoutManager(requireContext())
-        binding.recyclerViewFree.adapter = adapter
+        binding.recyclerViewProud.layoutManager = LinearLayoutManager(requireContext())
+        binding.recyclerViewProud.adapter = adapter
 
         // Firestore에서 게시글 불러오기
         loadPosts()
 
         return binding.root
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
     fun addPost(title: String, content: String, author: String) {
@@ -44,7 +49,7 @@ class ProudBoardFragment : Fragment() {
             "title" to title,
             "content" to content,
             "author" to author,
-            "category" to "지역별 게시판",
+            "category" to "자녀 자랑 게시판",
             "timestamp" to timestamp
         )
 
@@ -52,8 +57,10 @@ class ProudBoardFragment : Fragment() {
             .add(post)
             .addOnSuccessListener {
                 postList.add(0, Post(title, content, author, timestamp))
-                adapter.notifyItemInserted(0)
-                binding.recyclerViewFree.scrollToPosition(0)
+                adapter?.notifyItemInserted(0)
+                if (isAdded && view != null) {
+                    binding.recyclerViewProud.scrollToPosition(0)
+                }
             }
             .addOnFailureListener {
                 Toast.makeText(requireContext(), "게시글 등록 실패: ${it.message}", Toast.LENGTH_SHORT).show()
@@ -76,7 +83,7 @@ class ProudBoardFragment : Fragment() {
                     val timestamp = document.getLong("timestamp") ?: 0L
                     postList.add(Post(title, content, author, timestamp))
                 }
-                adapter.notifyDataSetChanged()
+                adapter?.notifyDataSetChanged()
             }
             .addOnFailureListener {
                 Toast.makeText(requireContext(), "게시글 불러오기 실패", Toast.LENGTH_SHORT).show()
@@ -84,8 +91,5 @@ class ProudBoardFragment : Fragment() {
             }
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
-    }
+
 }
