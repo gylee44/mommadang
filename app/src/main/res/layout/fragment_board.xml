@@ -88,8 +88,9 @@
                 android:scrollbars="none"
                 android:overScrollMode="never"
                 android:clipToPadding="false"
-                android:paddingEnd="12dp"
-                android:paddingStart="12dp">
+                android:fadingEdge="horizontal"
+                android:fadingEdgeLength="24dp"
+                android:requiresFadingEdge="horizontal">
 
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -100,7 +101,7 @@
                         android:id="@+id/btnFree"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="자유게시판"
+                        android:text="자유 게시판☕"
                         android:textSize="14sp"
                         app:cornerRadius="50dp"
                         app:strokeWidth="1dp"
@@ -108,22 +109,12 @@
                         android:textColor="#402e32"
                         android:backgroundTint="@color/Apricot"/>
 
-                    <com.google.android.material.button.MaterialButton
-                        android:id="@+id/btnMarket"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="중고 거래"
-                        app:cornerRadius="50dp"
-                        app:strokeWidth="1dp"
-                        app:strokeColor="@color/strokeColor"
-                        android:layout_marginStart="8dp"
-                        android:textColor="@color/textColor1" />
 
                     <com.google.android.material.button.MaterialButton
                         android:id="@+id/btnProud"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="자녀 자랑"
+                        android:text="자녀 자랑🌟"
                         app:cornerRadius="50dp"
                         app:strokeWidth="1dp"
                         app:strokeColor="@color/strokeColor"
@@ -131,15 +122,27 @@
                         android:layout_marginStart="8dp"/>
 
                     <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnMarket"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="중고 거래🛍"
+                        app:cornerRadius="50dp"
+                        app:strokeWidth="1dp"
+                        app:strokeColor="@color/strokeColor"
+                        android:layout_marginStart="8dp"
+                        android:textColor="@color/textColor1" />
+
+                    <com.google.android.material.button.MaterialButton
                         android:id="@+id/btnInfo"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textColor="@color/textColor1"
-                        android:text="정보 게시판"
+                        android:text="정보 게시판💡"
                         app:cornerRadius="50dp"
                         app:strokeWidth="1dp"
                         app:strokeColor="@color/strokeColor"
-                        android:layout_marginStart="8dp" />
+                        android:layout_marginStart="8dp"
+                        android:layout_marginEnd="12dp"/>
                 </LinearLayout>
             </HorizontalScrollView>
 
@@ -148,7 +151,7 @@
                 android:id="@+id/board_content_container"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="1" />
+                android:layout_weight="1"/>
 
         </LinearLayout>
 

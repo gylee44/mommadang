@@ -117,8 +117,9 @@ class BoardWriteActivity : AppCompatActivity() {
 
     private fun updateCategorySelection(selected: String) {
         val selectedColor = ContextCompat.getColor(this, R.color.Apricot)
-        val unselectedColor = ContextCompat.getColor(this, R.color.black)
-        val textColor = ContextCompat.getColor(this, R.color.white)
+        val unselectedColor = ContextCompat.getColor(this, R.color.cardColor)
+        val activeTextColor = ContextCompat.getColor(this, R.color.bt_click_textColor)
+        val inactiveTextColor = ContextCompat.getColor(this, R.color.textColor1)
 
         val allButtons = listOf(binding.btnFree, binding.btnMarket, binding.btnProud, binding.btnInfo)
 
@@ -134,7 +135,22 @@ class BoardWriteActivity : AppCompatActivity() {
             button.backgroundTintList = ColorStateList.valueOf(
                 if (isSelected) selectedColor else unselectedColor
             )
-            button.setTextColor(textColor)
+            button.setTextColor(
+                if (isSelected) activeTextColor
+                else inactiveTextColor
+            )
+            //버튼 fade 효과
+            button.animate()
+                .alpha(if (isSelected) 1f else 0.5f) // 선택된 버튼은 뚜렷하게, 나머지는 흐리게
+                .setDuration(200)
+                .start()
+        }
+        binding.categoryGuideText.text = when (selected) {
+            "중고 거래" -> "🛍 판매하거나 구매할 물건을 적어주세요"
+            "자녀 자랑 게시판" -> "🌟 아이의 멋진 순간을 자랑해주세요"
+            "정보 게시판" -> "💡 유용한 정보를 나눠주세요"
+            "자유게시판" -> "☕ 아무 이야기나 편하게 적어보세요"
+            else -> ""
         }
     }
 
