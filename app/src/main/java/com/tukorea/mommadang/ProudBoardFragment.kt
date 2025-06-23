@@ -49,7 +49,7 @@ class ProudBoardFragment : Fragment() {
             "title" to title,
             "content" to content,
             "author" to author,
-            "category" to "지역별 게시판",
+            "category" to "자녀 자랑 게시판",
             "timestamp" to timestamp
         )
 
