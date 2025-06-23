@@ -111,10 +111,52 @@
 
             <!-- 지도 -->
             <FrameLayout
+                android:id="@+id/mapMiniContainer"
+                android:layout_width="0dp"
+                android:layout_height="120dp"
+                android:layout_weight="1">
+
+                <!-- 실제 NaverMapFragment -->
+                <fragment
+                    android:id="@+id/map_fragment"
+                    android:name="com.naver.maps.map.MapFragment"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+
+                <!-- 클릭 전용 투명 오버레이 -->
+                <View
+                    android:id="@+id/mapOverlay"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@android:color/transparent"
+                    android:clickable="true"
+                    android:focusable="true" />
+
+            </FrameLayout>
+            <!--<FrameLayout
                 android:id="@+id/map_fragment_container"
                 android:layout_width="0dp"
                 android:layout_height="120dp"
-                android:layout_weight="1" />
+                android:layout_weight="1" />-->
+
+            <!--<FrameLayout
+                android:id="@+id/map_fragment_container"
+                android:layout_width="0dp"
+                android:layout_height="120dp"
+                android:layout_weight="1"
+                android:clickable="true"
+                android:focusable="true"
+                android:background="@android:color/darker_gray"/>-->
+
+             <!--터치 오버레이: 클릭 이벤트만 처리하고 투명
+            <View
+                android:id="@+id/mapOverlay"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@android:color/transparent"
+                android:clickable="true"
+                android:focusable="true" />-->
+
 
             <!-- 내 정보 -->
             <LinearLayout
