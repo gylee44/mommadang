@@ -60,7 +60,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="48dp"
                         android:hint="아이디"
-                        android:inputType="text"
+                        android:inputType="textNoSuggestions"
                         android:padding="12dp" />
 
                 </com.google.android.material.textfield.TextInputLayout>

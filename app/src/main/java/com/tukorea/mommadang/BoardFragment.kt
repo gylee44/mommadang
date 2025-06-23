@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
@@ -91,6 +92,39 @@ class BoardFragment : Fragment() {
             childFragmentManager.beginTransaction()
                 .replace(R.id.board_content_container, infoBoardFragment)
                 .commit()
+        }
+
+        // 좌상단 헤더 리스트
+        binding.btMenu.setOnClickListener {
+            binding.drawerLayout.openDrawer(androidx.core.view.GravityCompat.START)
+        }
+
+        binding.navView.setNavigationItemSelectedListener { menuItem ->
+            when (menuItem.itemId) {
+                R.id.nav_home -> {
+                    Toast.makeText(requireContext(), "홈으로 이동", Toast.LENGTH_SHORT).show()
+                    requireActivity().supportFragmentManager.beginTransaction()
+                        .replace(R.id.container_main, HomeFragment())
+                        .commit()
+                }
+                R.id.nav_board -> {
+//                    Toast.makeText(requireContext(), "게시판으로 이동", Toast.LENGTH_SHORT).show()
+                }
+                R.id.nav_profile -> {
+                    Toast.makeText(requireContext(), "프로필 창으로 이동", Toast.LENGTH_SHORT).show()
+                    requireActivity().supportFragmentManager.beginTransaction()
+                        .replace(R.id.container_main, ProfileFragment())
+                        .commit()
+                }
+                R.id.nav_map -> {
+                    Toast.makeText(requireContext(), "지도 화면으로 이동", Toast.LENGTH_SHORT).show()
+                    requireActivity().supportFragmentManager.beginTransaction()
+                        .replace(R.id.container_main, MapFragment())
+                        .commit()
+                }
+            }
+            binding.drawerLayout.closeDrawers()
+            true
         }
 
         // 초기 진입 시 기본 게시판

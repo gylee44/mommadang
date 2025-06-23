@@ -84,6 +84,10 @@ class BoardWriteActivity : AppCompatActivity() {
             updateCategorySelection(selectedCategory)
         }
 
+        binding.btBack.setOnClickListener { //상단 뒤로가기 버튼
+            finish()
+        }
+
         // 등록 버튼 클릭
         binding.btnSubmit.setOnClickListener {
             val title = binding.editTitle.text.toString().trim()
@@ -152,6 +156,7 @@ class BoardWriteActivity : AppCompatActivity() {
             "자유게시판" -> "☕ 아무 이야기나 편하게 적어보세요"
             else -> ""
         }
+
     }
 
 }

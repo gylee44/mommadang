@@ -1,302 +1,319 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:fitsSystemWindows="true">   <!--상태창 침범 X-->
-
-    <LinearLayout
-        android:id="@+id/fixed_header"
+    <androidx.drawerlayout.widget.DrawerLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/drawer_layout"
         android:layout_width="match_parent"
-        android:layout_height="72dp"
-        android:background="@color/headerColor"
-        android:elevation="4dp"
-        android:gravity="center_vertical"
-        android:orientation="horizontal"
-        android:paddingHorizontal="16dp">
+        android:layout_height="match_parent">
 
-        <ImageView
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:contentDescription="메뉴"
-            android:src="@drawable/ic_burger_menu" />
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:text="홈"
-            android:textColor="@color/textColor1"
-            android:textSize="18sp"
-            android:textStyle="bold" />
-
-        <ImageView
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:contentDescription="알림"
-            android:src="@drawable/ic_notification" />
-    </LinearLayout>
-
-    <LinearLayout
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="72dp"
-        android:orientation="vertical">
+        android:fitsSystemWindows="true">   <!--상태창 침범 X-->
 
-        <ScrollView
+        <LinearLayout
+            android:id="@+id/fixed_header"
+            android:layout_width="match_parent"
+            android:layout_height="72dp"
+            android:background="@color/headerColor"
+            android:elevation="4dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingHorizontal="16dp">
+
+            <ImageView
+                android:id="@+id/bt_menu"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:contentDescription="메뉴"
+                android:src="@drawable/ic_burger_menu" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="홈"
+                android:textColor="@color/textColor1"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:contentDescription="알림"
+                android:src="@drawable/ic_notification" />
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/backgroundColor"
-            android:clipToPadding="false"
-            android:fitsSystemWindows="true"
-            android:paddingTop="0dp">
+            android:layout_marginTop="72dp"
+            android:orientation="vertical">
 
-            <LinearLayout
+            <ScrollView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:paddingStart="24dp"
-                android:paddingTop="24dp"
-                android:paddingEnd="24dp"
-                android:paddingBottom="24dp">
+                android:layout_height="match_parent"
+                android:background="@color/backgroundColor"
+                android:clipToPadding="false"
+                android:fitsSystemWindows="true"
+                android:paddingTop="0dp">
 
-                <!-- 행사 배너 캐러셀UI/하이퍼링크-->
-                <com.google.android.material.card.MaterialCardView
-                    android:layout_width="match_parent"
-                    android:layout_height="180dp"
-                    android:layout_marginBottom="20dp"
-                    app:cardCornerRadius="16dp"
-                    app:cardElevation="4dp"
-                    app:cardBackgroundColor="@android:color/transparent">
-
-                <androidx.viewpager2.widget.ViewPager2
-                    android:id="@+id/viewPager"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="@drawable/bg_card_rounded"
-                    android:clipToOutline="true" />
-                </com.google.android.material.card.MaterialCardView>
-
-                <!-- 날씨 카드 -->
-                <com.google.android.material.card.MaterialCardView
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="0dp"
-                    android:layout_marginBottom="28dp"
-                    app:cardBackgroundColor="@android:color/transparent"
-                    app:cardCornerRadius="32dp"
-                    app:cardElevation="4dp"
-                    app:strokeWidth="0dp">
+                    android:orientation="vertical"
+                    android:paddingStart="24dp"
+                    android:paddingTop="24dp"
+                    android:paddingEnd="24dp"
+                    android:paddingBottom="24dp">
 
-                    <LinearLayout
+                    <!-- 행사 배너 캐러셀UI/하이퍼링크-->
+                    <com.google.android.material.card.MaterialCardView
+                        android:layout_width="match_parent"
+                        android:layout_height="180dp"
+                        android:layout_marginBottom="20dp"
+                        app:cardCornerRadius="16dp"
+                        app:cardElevation="4dp"
+                        app:cardBackgroundColor="@android:color/transparent">
+
+                    <androidx.viewpager2.widget.ViewPager2
+                        android:id="@+id/viewPager"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/bg_card_rounded"
+                        android:clipToOutline="true" />
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <!-- 날씨 카드 -->
+                    <com.google.android.material.card.MaterialCardView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:background="@drawable/bg_weather_sun"
-                        android:clipToOutline="true"
-                        android:orientation="vertical"
-                        android:padding="16dp">
-
-                        <TextView
-                            android:id="@+id/day_of_the_week"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="4dp"
-                            android:text="TUESDAY"
-                            android:textColor="@color/textColor1"
-                            android:letterSpacing="0.03"
-                            android:textSize="23sp" />
+                        android:layout_marginHorizontal="0dp"
+                        android:layout_marginBottom="28dp"
+                        app:cardBackgroundColor="@android:color/transparent"
+                        app:cardCornerRadius="32dp"
+                        app:cardElevation="4dp"
+                        app:strokeWidth="0dp">
 
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="8dp"
-                            android:gravity="center_vertical"
-                            android:orientation="horizontal">
+                            android:background="@drawable/bg_weather_sun"
+                            android:clipToOutline="true"
+                            android:orientation="vertical"
+                            android:padding="16dp">
 
-                            <!-- 미세먼지 정보 묶음 -->
-                            <LinearLayout
+                            <TextView
+                                android:id="@+id/day_of_the_week"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_marginTop="4dp"
-                                android:layout_marginHorizontal="12dp"
+                                android:layout_marginStart="4dp"
+                                android:text="TUESDAY"
+                                android:textColor="@color/textColor1"
+                                android:letterSpacing="0.03"
+                                android:textSize="23sp" />
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="8dp"
+                                android:gravity="center_vertical"
+                                android:orientation="horizontal">
+
+                                <!-- 미세먼지 정보 묶음 -->
+                                <LinearLayout
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="4dp"
+                                    android:layout_marginHorizontal="12dp"
+                                    android:orientation="vertical">
+
+                                    <TextView
+                                        android:id="@+id/fine_dust"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="미세먼지"
+                                        android:textColor="@color/textColor3_sun"
+                                        android:textSize="16sp" />
+
+                                    <TextView
+                                        android:id="@+id/fine_dust_value"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginTop="2dp"
+                                        android:text="PM10: 34㎍/㎥"
+                                        android:textStyle="bold"
+                                        android:textColor="@color/textColor3_sun"
+                                        android:textSize="14sp" />
+                                </LinearLayout>
+
+                                <TextView
+                                    android:id="@+id/temperature"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginHorizontal="12dp"
+                                    android:layout_weight="1"
+                                    android:gravity="end"
+                                    android:paddingRight="8dp"
+                                    android:text="19℃"
+                                    android:textColor="@color/textColor1"
+                                    android:textSize="48sp" />
+
+                                <ImageView
+                                    android:id="@+id/ic_weather"
+                                    android:layout_width="50dp"
+                                    android:layout_height="50dp"
+                                    android:src="@drawable/ic_weather_sun" />
+                            </LinearLayout>
+
+                        </LinearLayout>
+                    </com.google.android.material.card.MaterialCardView>
+                    <!-- 게시판 카드 -->
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/boardCard"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="0dp"
+                        android:layout_marginBottom="24dp"
+                        app:cardBackgroundColor="@color/cardColor"
+                        app:cardCornerRadius="16dp"
+                        app:cardElevation="4dp"
+                        app:strokeColor="#E0DAD1"
+                        app:strokeWidth="1dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:clipToOutline="true"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal"
+                            android:padding="16dp">
+
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="2"
                                 android:orientation="vertical">
 
                                 <TextView
-                                    android:id="@+id/fine_dust"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="미세먼지"
-                                    android:textColor="@color/textColor3_sun"
-                                    android:textSize="16sp" />
+                                    android:text="게시판"
+                                    android:textColor="#211808"
+                                    android:textSize="20sp"
+                                    android:textStyle="bold" />
 
                                 <TextView
-                                    android:id="@+id/fine_dust_value"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginTop="2dp"
-                                    android:text="PM10: 34㎍/㎥"
-                                    android:textStyle="bold"
-                                    android:textColor="@color/textColor3_sun"
+                                    android:layout_marginTop="4dp"
+                                    android:text="주변 사람들과 함께 소통해요"
+                                    android:textColor="#b4872d"
                                     android:textSize="14sp" />
+
+                                <ImageView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="16dp"
+                                    android:contentDescription="게시판 이동 버튼"
+                                    android:src="@drawable/openbutton" />
+
+
                             </LinearLayout>
 
-                            <TextView
-                                android:id="@+id/temperature"
+                            <ImageView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_marginHorizontal="12dp"
-                                android:layout_weight="1"
-                                android:gravity="end"
-                                android:paddingRight="8dp"
-                                android:text="19℃"
-                                android:textColor="@color/textColor1"
-                                android:textSize="48sp" />
-
-                            <ImageView
-                                android:id="@+id/ic_weather"
-                                android:layout_width="50dp"
-                                android:layout_height="50dp"
-                                android:src="@drawable/ic_weather_sun" />
+                                android:contentDescription="게시판"
+                                android:src="@drawable/board" />
                         </LinearLayout>
+                    </com.google.android.material.card.MaterialCardView>
 
-                    </LinearLayout>
-                </com.google.android.material.card.MaterialCardView>
-                <!-- 게시판 카드 -->
-                <com.google.android.material.card.MaterialCardView
-                    android:id="@+id/boardCard"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="0dp"
-                    android:layout_marginBottom="24dp"
-                    app:cardBackgroundColor="@color/cardColor"
-                    app:cardCornerRadius="16dp"
-                    app:cardElevation="4dp"
-                    app:strokeColor="#E0DAD1"
-                    app:strokeWidth="1dp">
-
-                    <LinearLayout
+                    <!--            내 정보 카드-->
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/profileCard"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:clipToOutline="true"
-                        android:gravity="center_vertical"
-                        android:orientation="horizontal"
-                        android:padding="16dp">
+                        android:layout_marginHorizontal="0dp"
+                        android:layout_marginBottom="24dp"
+                        app:cardBackgroundColor="@color/cardColor"
+                        app:cardCornerRadius="16dp"
+                        app:cardElevation="4dp"
+                        app:strokeColor="#E0DAD1"
+                        app:strokeWidth="1dp">
 
                         <LinearLayout
-                            android:layout_width="0dp"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_weight="2"
-                            android:orientation="vertical">
+                            android:clipToOutline="true"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal"
+                            android:padding="16dp">
 
-                            <TextView
-                                android:layout_width="wrap_content"
+                            <LinearLayout
+                                android:layout_width="0dp"
                                 android:layout_height="wrap_content"
-                                android:text="게시판"
-                                android:textColor="#211808"
-                                android:textSize="20sp"
-                                android:textStyle="bold" />
+                                android:layout_weight="2"
+                                android:orientation="vertical">
 
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="4dp"
-                                android:text="주변 사람들과 함께 소통해요"
-                                android:textColor="#b4872d"
-                                android:textSize="14sp" />
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="4dp"
+                                    android:text="프로필"
+                                    android:textColor="@color/textColor1"
+                                    android:textSize="20sp"
+                                    android:textStyle="bold" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="4dp"
+                                    android:text="내 정보 확인"
+                                    android:textColor="#b4872d"
+                                    android:textSize="14sp" />
+
+                                <ImageView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="16dp"
+                                    android:contentDescription="게시판 이동 버튼"
+                                    android:src="@drawable/viewbutton" />
+                            </LinearLayout>
 
                             <ImageView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_marginTop="16dp"
-                                android:contentDescription="게시판 이동 버튼"
-                                android:src="@drawable/openbutton" />
-
+                                android:contentDescription="내 정보"
+                                android:src="@drawable/profile_photo" />
 
                         </LinearLayout>
+                    </com.google.android.material.card.MaterialCardView>
 
-                        <ImageView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:contentDescription="게시판"
-                            android:src="@drawable/board" />
-                    </LinearLayout>
-                </com.google.android.material.card.MaterialCardView>
+                    <!-- 지도 -->
 
-                <!--            내 정보 카드-->
-                <com.google.android.material.card.MaterialCardView
-                    android:id="@+id/profileCard"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="0dp"
-                    android:layout_marginBottom="24dp"
-                    app:cardBackgroundColor="@color/cardColor"
-                    app:cardCornerRadius="16dp"
-                    app:cardElevation="4dp"
-                    app:strokeColor="#E0DAD1"
-                    app:strokeWidth="1dp">
-
-                    <LinearLayout
+                    <!--            니중에 ImageView 삭제 후 미니맵으로 변경-->
+                    <!--            <com.naver.maps.map.MapView-->
+                    <ImageView
+                        android:id="@+id/mini_map_view"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="180dp"
+                        android:layout_marginTop="16dp"
+                        android:background="@drawable/bg_card_rounded"
                         android:clipToOutline="true"
-                        android:gravity="center_vertical"
-                        android:orientation="horizontal"
-                        android:padding="16dp">
-
-                        <LinearLayout
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="2"
-                            android:orientation="vertical">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="4dp"
-                                android:text="프로필"
-                                android:textColor="@color/textColor1"
-                                android:textSize="20sp"
-                                android:textStyle="bold" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="4dp"
-                                android:text="내 정보 확인"
-                                android:textColor="#b4872d"
-                                android:textSize="14sp" />
-
-                            <ImageView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="16dp"
-                                android:contentDescription="게시판 이동 버튼"
-                                android:src="@drawable/viewbutton" />
-                        </LinearLayout>
-
-                        <ImageView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:contentDescription="내 정보"
-                            android:src="@drawable/profile_photo" />
-
-                    </LinearLayout>
-                </com.google.android.material.card.MaterialCardView>
-
-                <!-- 지도 -->
-
-                <!--            니중에 ImageView 삭제 후 미니맵으로 변경-->
-                <!--            <com.naver.maps.map.MapView-->
-                <ImageView
-                    android:id="@+id/mini_map_view"
-                    android:layout_width="match_parent"
-                    android:layout_height="180dp"
-                    android:layout_marginTop="16dp"
-                    android:background="@drawable/bg_card_rounded"
-                    android:clipToOutline="true"
-                    android:scaleType="centerCrop"
-                    android:src="@drawable/sample_map" />
-            </LinearLayout>
-        </ScrollView>
-    </LinearLayout>
-</FrameLayout>
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/sample_map" />
+                </LinearLayout>
+            </ScrollView>
+        </LinearLayout>
+    </FrameLayout>
+        <com.google.android.material.navigation.NavigationView
+            android:id="@+id/nav_view"
+            android:layout_width="240dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="start"
+            android:background="@color/backgroundColor"
+            app:headerLayout="@layout/nav_header"
+            app:itemTextColor="@color/nav_item_text_color"
+            app:menu="@menu/drawer_menu" />
+    </androidx.drawerlayout.widget.DrawerLayout>

@@ -110,6 +110,43 @@ class HomeFragment : Fragment() {
                 .commit()
         }
 
+        // 좌상단 헤더 리스트
+        binding.btMenu.setOnClickListener {
+            binding.drawerLayout.openDrawer(androidx.core.view.GravityCompat.START)
+        }
+
+        binding.navView.setNavigationItemSelectedListener { menuItem ->
+            when (menuItem.itemId) {
+                R.id.nav_home -> {
+//                    Toast.makeText(requireContext(), "홈으로 이동", Toast.LENGTH_SHORT).show()
+                    // 필요 시 Fragment 전환 추가
+                }
+                R.id.nav_board -> {
+                    Toast.makeText(requireContext(), "게시판으로 이동", Toast.LENGTH_SHORT).show()
+                    requireActivity().supportFragmentManager.beginTransaction()
+                        .replace(R.id.container_main, BoardFragment())
+                        .addToBackStack(null)
+                        .commit()
+                }
+                R.id.nav_profile -> {
+                    Toast.makeText(requireContext(), "프로필 창으로 이동", Toast.LENGTH_SHORT).show()
+                    requireActivity().supportFragmentManager.beginTransaction()
+                        .replace(R.id.container_main, ProfileFragment())
+                        .addToBackStack(null)
+                        .commit()
+                }
+                R.id.nav_map -> {
+                    Toast.makeText(requireContext(), "지도 화면으로 이동", Toast.LENGTH_SHORT).show()
+                    requireActivity().supportFragmentManager.beginTransaction()
+                        .replace(R.id.container_main, MapFragment())
+                        .addToBackStack(null)
+                        .commit()
+                }
+            }
+            binding.drawerLayout.closeDrawers()
+            true
+        }
+
         // 시작 페이지를 실제 첫 번째 배너로 설정 (복제 아닌 진짜)
         binding.viewPager.setCurrentItem(1, false)
 

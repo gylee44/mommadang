@@ -1,0 +1,19 @@
+<menu
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/nav_home"
+        android:title="홈"
+        android:icon="@drawable/ic_home"/>
+    <item
+        android:id="@+id/nav_board"
+        android:title="게시판"
+        android:icon="@drawable/sample_board"/>
+    <item
+        android:id="@+id/nav_profile"
+        android:title="프로필"
+        android:icon="@drawable/ic_user_profile"/>
+    <item
+        android:id="@+id/nav_map"
+        android:title="지도"
+        android:icon="@drawable/ic_map"/>
+</menu>
