@@ -20,14 +20,16 @@ import com.tukorea.mommadang.FullMapActivity
 import com.tukorea.mommadang.ProfileFragment
 import com.tukorea.mommadang.R
 import com.tukorea.mommadang.databinding.FragmentHomeBinding
+import com.naver.maps.map.overlay.Marker        // 마커
+
 
 class HomeFragment : Fragment(), OnMapReadyCallback {
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
 
-    // 초기 카메라 위치
-    private val initLat = 37.5665
-    private val initLng = 126.9780
+    // 초기 카메라 위치 : 시흥시청
+    private val initLat = 37.3814
+    private val initLng = 126.8059
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -100,6 +102,11 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
         }
         // 초기 카메라 위치 설정
         naverMap.moveCamera(CameraUpdate.scrollTo(LatLng(initLat, initLng)))
+
+        // 마커 표시
+        val miniMarker = Marker()
+        miniMarker.position = LatLng(initLat, initLng)
+        miniMarker.map = naverMap
     }
 
     override fun onDestroyView() {
