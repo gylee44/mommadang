@@ -62,8 +62,8 @@ class HomeFragment : Fragment() {
         }
 
         mapFrag.getMapAsync { naverMap ->
-            val seoul = com.naver.maps.geometry.LatLng(37.5665, 126.9780)
-            naverMap.moveCamera(com.naver.maps.map.CameraUpdate.scrollTo(seoul))
+            val siheung = com.naver.maps.geometry.LatLng(37.3814, 126.8059)
+            naverMap.moveCamera(com.naver.maps.map.CameraUpdate.scrollTo(siheung))
         }
 
 
