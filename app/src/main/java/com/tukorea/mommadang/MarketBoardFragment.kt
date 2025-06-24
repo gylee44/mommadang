@@ -55,7 +55,7 @@ class MarketBoardFragment : Fragment() {
         db.collection("posts")
             .add(post)
             .addOnSuccessListener {
-                postList.add(0, Post(title, content, author, timestamp))
+                postList.add(0, Post(title, content, author, timestamp, "중고 거래"))
                 adapter?.notifyItemInserted(0)
                 if (isAdded && view != null) {
                     binding.recyclerViewMarket.scrollToPosition(0)
@@ -80,7 +80,8 @@ class MarketBoardFragment : Fragment() {
                     val content = document.getString("content") ?: ""
                     val author = document.getString("author") ?: "익명"
                     val timestamp = document.getLong("timestamp") ?: 0L
-                    postList.add(Post(title, content, author, timestamp))
+                    val category = document.getString("category") ?: "중고 거래"
+                    postList.add(Post(title, content, author, timestamp, category))
                 }
                 adapter?.notifyDataSetChanged()
             }

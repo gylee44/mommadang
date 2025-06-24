@@ -11,7 +11,7 @@ import java.util.Date
 import java.util.Locale
 
 //시간추가
-data class Post(val title: String, val content: String, val author: String, val timestamp: Long)
+data class Post(val title: String, val content: String, val author: String, val timestamp: Long, val category: String)
 
 class PostAdapter(private val postList: List<Post>) :
     RecyclerView.Adapter<PostAdapter.PostViewHolder>() {
@@ -40,6 +40,7 @@ class PostAdapter(private val postList: List<Post>) :
                 putExtra("title", post.title)
                 putExtra("content", post.content)
                 putExtra("author", post.author) // 작성자 정보 전달
+                putExtra("category", post.category)  //글 카테고리
             }
             holder.itemView.context.startActivity(intent)
         }

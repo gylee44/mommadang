@@ -48,14 +48,14 @@ class FreeBoardFragment : Fragment() {
             "title" to title,
             "content" to content,
             "author" to author,
-            "category" to "자유게시판",
+            "category" to "자유 게시판",
             "timestamp" to timestamp
         )
 
         db.collection("posts")
             .add(post)
             .addOnSuccessListener {
-                postList.add(0, Post(title, content, author, timestamp))
+                postList.add(0, Post(title, content, author, timestamp, "자유 게시판"))
                 adapter?.notifyItemInserted(0)
                 if (isAdded && view != null) {
                     binding.recyclerViewFree.scrollToPosition(0)
@@ -70,7 +70,7 @@ class FreeBoardFragment : Fragment() {
     // Firestore에서 게시글 불러오기
     private fun loadPosts() {
         db.collection("posts")
-            .whereEqualTo("category", "자유게시판")
+            .whereEqualTo("category", "자유 게시판")
             .orderBy("timestamp", Query.Direction.DESCENDING)
             .get()
             .addOnSuccessListener { result ->
@@ -80,7 +80,8 @@ class FreeBoardFragment : Fragment() {
                     val content = document.getString("content") ?: ""
                     val author = document.getString("author") ?: "익명"
                     val timestamp = document.getLong("timestamp") ?: 0L
-                    postList.add(Post(title, content, author, timestamp))
+                    val category = document.getString("category") ?: "자유 게시판"
+                    postList.add(Post(title, content, author, timestamp, category))
                 }
                 adapter?.notifyDataSetChanged()
             }

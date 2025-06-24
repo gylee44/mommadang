@@ -25,7 +25,7 @@ class BoardFragment : Fragment() {
     private val proudBoardFragment = ProudBoardFragment()
     private val infoBoardFragment = InfoBoardFragment()
 
-    private var selectedCategory: String = "자유게시판"
+    private var selectedCategory: String = "자유 게시판"
 
     private val writeLauncher = registerForActivityResult(
         ActivityResultContracts.StartActivityForResult()
@@ -41,7 +41,7 @@ class BoardFragment : Fragment() {
 
             if (title != null && content != null && category != null) {
                 when (category) {
-                    "자유게시판" -> freeBoardFragment.addPost(title, content, author)
+                    "자유 게시판" -> freeBoardFragment.addPost(title, content, author)
                     "중고 거래" -> marketBoardFragment.addPost(title, content, author)
                     "자녀 자랑 게시판" -> proudBoardFragment.addPost(title, content, author)
                     "정보 게시판" -> infoBoardFragment.addPost(title, content, author)
@@ -64,7 +64,7 @@ class BoardFragment : Fragment() {
 
         // 카테고리 버튼 클릭 시
         binding.btnFree.setOnClickListener {
-            selectedCategory = "자유게시판"
+            selectedCategory = "자유 게시판"
             updateCategorySelection()
             childFragmentManager.beginTransaction()
                 .replace(R.id.board_content_container, freeBoardFragment)
@@ -149,7 +149,7 @@ class BoardFragment : Fragment() {
 
         allButtons.forEach { button ->
             val isSelected = when (button) {
-                binding.btnFree -> selectedCategory == "자유게시판"
+                binding.btnFree -> selectedCategory == "자유 게시판"
                 binding.btnMarket -> selectedCategory == "중고 거래"
                 binding.btnProud -> selectedCategory == "자녀 자랑 게시판"
                 binding.btnInfo -> selectedCategory == "정보 게시판"

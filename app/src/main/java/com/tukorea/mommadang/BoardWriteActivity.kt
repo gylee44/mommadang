@@ -17,7 +17,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 class BoardWriteActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityBoardWriteBinding
-    private var selectedCategory: String = "자유게시판" // 기본 카테고리
+    private var selectedCategory: String = "자유 게시판" // 기본 카테고리
 
     // 사진
     private var selectedImageUri: Uri? = null
@@ -65,7 +65,7 @@ class BoardWriteActivity : AppCompatActivity() {
 
         // 카테고리 버튼 클릭 이벤트
         binding.btnFree.setOnClickListener {
-            selectedCategory = "자유게시판"
+            selectedCategory = "자유 게시판"
             updateCategorySelection(selectedCategory)
         }
 
@@ -129,7 +129,7 @@ class BoardWriteActivity : AppCompatActivity() {
 
         allButtons.forEach { button ->
             val isSelected = when (button) {
-                binding.btnFree -> selected == "자유게시판"
+                binding.btnFree -> selected == "자유 게시판"
                 binding.btnMarket -> selected == "중고 거래"
                 binding.btnProud -> selected == "자녀 자랑 게시판"
                 binding.btnInfo -> selected == "정보 게시판"
@@ -153,7 +153,7 @@ class BoardWriteActivity : AppCompatActivity() {
             "중고 거래" -> "🛍 판매하거나 구매할 물건을 적어주세요"
             "자녀 자랑 게시판" -> "🌟 아이의 멋진 순간을 자랑해주세요"
             "정보 게시판" -> "💡 유용한 정보를 나눠주세요"
-            "자유게시판" -> "☕ 아무 이야기나 편하게 적어보세요"
+            "자유 게시판" -> "☕ 아무 이야기나 편하게 적어보세요"
             else -> ""
         }
 

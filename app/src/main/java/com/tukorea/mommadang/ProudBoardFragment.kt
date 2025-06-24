@@ -56,7 +56,7 @@ class ProudBoardFragment : Fragment() {
         db.collection("posts")
             .add(post)
             .addOnSuccessListener {
-                postList.add(0, Post(title, content, author, timestamp))
+                postList.add(0, Post(title, content, author, timestamp, "자녀 자랑 게시판"))
                 adapter?.notifyItemInserted(0)
                 if (isAdded && view != null) {
                     binding.recyclerViewProud.scrollToPosition(0)
@@ -81,7 +81,8 @@ class ProudBoardFragment : Fragment() {
                     val content = document.getString("content") ?: ""
                     val author = document.getString("author") ?: "익명"
                     val timestamp = document.getLong("timestamp") ?: 0L
-                    postList.add(Post(title, content, author, timestamp))
+                    val category = document.getString("category") ?: "자녀 자랑 게시판"
+                    postList.add(Post(title, content, author, timestamp, category))
                 }
                 adapter?.notifyDataSetChanged()
             }

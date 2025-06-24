@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- 눌렀을 때 진해지는 효과 -->
+    <item android:state_pressed="true">
+        <shape android:shape="oval">
+            <solid android:color="#aca38b" /> <!-- 눌렀을 때 배경 -->
+        </shape>
+    </item>
+    <!-- 기본 배경은 투명 -->
+    <item>
+        <shape android:shape="oval">
+            <solid android:color="@android:color/transparent" />
+        </shape>
+    </item>
+</selector>
