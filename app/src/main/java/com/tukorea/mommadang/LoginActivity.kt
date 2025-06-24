@@ -45,12 +45,12 @@ class LoginActivity : AppCompatActivity() {
                             .child(uid)
 
                         userRef.get().addOnSuccessListener { snapshot ->
-                            val userName =
-                                snapshot.child("name").getValue(String::class.java) ?: "알 수 없음"
+                            val userNickname =
+                                snapshot.child("nickname").getValue(String::class.java) ?: "알 수 없음"
 
                             // SharedPreferences 저장
                             val prefs = getSharedPreferences("user_prefs", MODE_PRIVATE)
-                            prefs.edit().putString("user_name", userName).apply()
+                            prefs.edit().putString("user_nickname", userNickname).apply()
 
                             // 로그인 성공 → 메인 화면으로 이동
                             Toast.makeText(this, "로그인 성공", Toast.LENGTH_SHORT).show()

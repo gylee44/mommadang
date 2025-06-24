@@ -37,7 +37,7 @@ class BoardFragment : Fragment() {
             val category = data?.getStringExtra("category")
 
             val prefs = requireActivity().getSharedPreferences("user_prefs", AppCompatActivity.MODE_PRIVATE)
-            val author = prefs.getString("user_name", "알 수 없음") ?: "알 수 없음"
+            val author = prefs.getString("user_nickname", "알 수 없음") ?: "알 수 없음"
 
             if (title != null && content != null && category != null) {
                 when (category) {
