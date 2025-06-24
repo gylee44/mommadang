@@ -8,11 +8,12 @@
         android:id="@+id/fixed_header"
         android:layout_width="match_parent"
         android:layout_height="72dp"
-        android:background="@color/headerColor"
+        android:background="#f0e5cf"
         android:elevation="4dp"
         android:gravity="center_vertical"
         android:paddingStart="16dp"
-        android:paddingEnd="16dp">
+        android:paddingEnd="16dp"
+        android:translationZ="10dp">
 
         <ImageView
             android:id="@+id/bt_back2"
@@ -32,7 +33,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:text="지도"
+            android:text="🏡 맘 추천 지도"
             android:textColor="@color/textColor1"
             android:textSize="18sp"
             android:textStyle="bold" />
