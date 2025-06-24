@@ -1,9 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
+
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_MEDIA_IMAGES" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
     <application
         android:allowBackup="true"
@@ -15,12 +19,16 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MomMaDang"
         tools:targetApi="31">
+        <activity
+            android:name=".FullMapActivity"
+            android:exported="false" />
 
         <meta-data
-            android:name="com.naver.maps.map.CLIENT_ID"
-            android:value="YOUR_CLIENT_ID_HERE" />
+            android:name="com.naver.maps.map.NCP_KEY_ID"
+            android:value="au5lfts13d" />
 
-        <!-- 앱 시작 화면을 SplashActivity로 설정 -->
+
+ <!--  앱 시작 화면을 SplashActivity로 설정 -->
         <activity
             android:name=".SplashActivity"
             android:exported="true">

@@ -1,47 +1,62 @@
 package com.tukorea.mommadang
 
+import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.util.Log
 import android.view.LayoutInflater
+import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import com.tukorea.mommadang.databinding.FragmentHomeBinding
-import android.content.Intent
-import android.net.Uri
 import androidx.viewpager2.widget.ViewPager2
+import com.naver.maps.geometry.LatLng
+import com.naver.maps.map.CameraUpdate
+import com.naver.maps.map.MapFragment
+import com.naver.maps.map.NaverMap
+import com.naver.maps.map.OnMapReadyCallback
+import com.naver.maps.map.overlay.Marker
+import com.tukorea.mommadang.databinding.FragmentHomeBinding
 import jp.wasabeef.glide.transformations.CropTransformation
 
-class HomeFragment : Fragment() {
+class HomeFragment : Fragment(), OnMapReadyCallback {
 
-    private lateinit var bannerItems: List<BannerItem>  // 배너 아이템 목록
-    private lateinit var adapter: BannerAdapter         // 배너 어댑터
-    private var currentPage = 0                         // 현재 배너 페이지 인덱스
+    private lateinit var bannerItems: List<BannerItem>
+    private lateinit var adapter: BannerAdapter
+    private var currentPage = 0
 
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
 
-    // 자동 슬라이드 핸들러 및 루프
+    private val initLat = 37.3814
+    private val initLng = 126.8059
+
     private val slideHandler = Handler(Looper.getMainLooper())
     private val slideRunnable = object : Runnable {
         override fun run() {
             if (bannerItems.isNotEmpty()) {
                 currentPage++
                 binding.viewPager.setCurrentItem(currentPage, true)
-                slideHandler.postDelayed(this, 3000)  // 3초 간격으로 슬라이드
+                slideHandler.postDelayed(this, 3000)
             }
         }
     }
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
+        return binding.root
+    }
 
-        // 실제 사용할 배너 목록 정의
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        // 배너 아이템 세팅
         val realBannerItems = listOf(
             BannerItem(
                 "https://kfescdn.visitkorea.or.kr/kfes/upload/contents/db/7e08a4f9-ce96-4ac5-9c04-c2b59bdfc24e_3.png",
@@ -55,18 +70,15 @@ class HomeFragment : Fragment() {
             )
         )
 
-        // 무한 슬라이드를 위해 앞뒤에 아이템 복제
         bannerItems = listOf(realBannerItems.last()) + realBannerItems + listOf(realBannerItems.first())
-
-        // 어댑터 생성: 배너 클릭 시 웹 페이지 열기
-        val adapter = BannerAdapter(bannerItems) { url ->
-            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
+        adapter = BannerAdapter(bannerItems) { url ->
+            val intent = Intent(Intent.ACTION_VIEW, android.net.Uri.parse(url))
             startActivity(intent)
         }
 
         binding.viewPager.adapter = adapter
+        binding.viewPager.setCurrentItem(1, false)
 
-        // 무한 슬라이드를 위한 페이지 이동 처리
         binding.viewPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
             override fun onPageSelected(position: Int) {
                 currentPage = position
@@ -74,7 +86,6 @@ class HomeFragment : Fragment() {
 
             override fun onPageScrollStateChanged(state: Int) {
                 if (state == ViewPager2.SCROLL_STATE_IDLE) {
-                    // 양 끝일 경우 복제 아이템에서 실제 아이템으로 순간이동
                     if (currentPage == 0) {
                         binding.viewPager.setCurrentItem(bannerItems.size - 2, false)
                     } else if (currentPage == bannerItems.size - 1) {
@@ -84,60 +95,46 @@ class HomeFragment : Fragment() {
             }
         })
 
-        // ▼ ▼ ▼ 카드 뷰 클릭 이벤트 ▼ ▼ ▼
-
-        // 게시판 카드 클릭 → BoardFragment로 이동
+        // 카드뷰 클릭 이벤트
         binding.boardCard.setOnClickListener {
-            requireActivity().supportFragmentManager.beginTransaction()
+            parentFragmentManager.beginTransaction()
                 .replace(R.id.container_main, BoardFragment())
                 .addToBackStack(null)
                 .commit()
         }
 
-        // 미니맵 카드 클릭 → MapFragment로 이동 (현재 주석처리됨)
-//        binding.miniMapView.setOnClickListener {
-//            requireActivity().supportFragmentManager.beginTransaction()
-//                .replace(R.id.container_main, MapFragment())
-//                .addToBackStack(null)
-//                .commit()
-//        }
-
-        // 내 정보 카드 클릭 → ProfileFragment로 이동
         binding.profileCard.setOnClickListener {
-            requireActivity().supportFragmentManager.beginTransaction()
+            parentFragmentManager.beginTransaction()
                 .replace(R.id.container_main, ProfileFragment())
                 .addToBackStack(null)
                 .commit()
         }
 
-        // 좌상단 헤더 리스트
+        // Drawer 메뉴
         binding.btMenu.setOnClickListener {
             binding.drawerLayout.openDrawer(androidx.core.view.GravityCompat.START)
         }
 
         binding.navView.setNavigationItemSelectedListener { menuItem ->
             when (menuItem.itemId) {
-                R.id.nav_home -> {
-//                    Toast.makeText(requireContext(), "홈으로 이동", Toast.LENGTH_SHORT).show()
-                    // 필요 시 Fragment 전환 추가
-                }
+                R.id.nav_home -> { }
                 R.id.nav_board -> {
                     Toast.makeText(requireContext(), "게시판으로 이동", Toast.LENGTH_SHORT).show()
-                    requireActivity().supportFragmentManager.beginTransaction()
+                    parentFragmentManager.beginTransaction()
                         .replace(R.id.container_main, BoardFragment())
                         .addToBackStack(null)
                         .commit()
                 }
                 R.id.nav_profile -> {
                     Toast.makeText(requireContext(), "프로필 창으로 이동", Toast.LENGTH_SHORT).show()
-                    requireActivity().supportFragmentManager.beginTransaction()
+                    parentFragmentManager.beginTransaction()
                         .replace(R.id.container_main, ProfileFragment())
                         .addToBackStack(null)
                         .commit()
                 }
                 R.id.nav_map -> {
                     Toast.makeText(requireContext(), "지도 화면으로 이동", Toast.LENGTH_SHORT).show()
-                    requireActivity().supportFragmentManager.beginTransaction()
+                    parentFragmentManager.beginTransaction()
                         .replace(R.id.container_main, MapFragment())
                         .addToBackStack(null)
                         .commit()
@@ -147,26 +144,64 @@ class HomeFragment : Fragment() {
             true
         }
 
-        // 시작 페이지를 실제 첫 번째 배너로 설정 (복제 아닌 진짜)
-        binding.viewPager.setCurrentItem(1, false)
+        // 미니맵 처리
+        binding.mapMiniContainer.setOnTouchListener { v, event ->
+            v.parent.requestDisallowInterceptTouchEvent(true)
+            false
+        }
 
-        return binding.root
+        binding.mapOverlay.setOnClickListener {
+            startActivity(Intent(requireContext(), FullMapActivity::class.java).apply {
+                putExtra("lat", initLat)
+                putExtra("lng", initLng)
+            })
+        }
+
+        binding.mapMiniContainer.setOnClickListener {
+            Log.d("HomeFragment", "mapMiniContainer clicked")
+            Toast.makeText(requireContext(), "지도 전체보기", Toast.LENGTH_SHORT).show()
+            startActivity(Intent(requireContext(), FullMapActivity::class.java).apply {
+                putExtra("lat", initLat)
+                putExtra("lng", initLng)
+            })
+        }
+
+        val mapFrag = childFragmentManager.findFragmentById(R.id.map_fragment) as MapFragment?
+            ?: MapFragment.newInstance().also {
+                childFragmentManager.beginTransaction()
+                    .add(R.id.map_fragment, it)
+                    .commit()
+            }
+
+        mapFrag.getMapAsync(this)
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
+    override fun onMapReady(naverMap: NaverMap) {
+        naverMap.uiSettings.apply {
+            isScrollGesturesEnabled = false
+            isZoomGesturesEnabled = false
+            isRotateGesturesEnabled = false
+            isTiltGesturesEnabled = false
+        }
+        naverMap.moveCamera(CameraUpdate.scrollTo(LatLng(initLat, initLng)))
+
+        val marker = Marker()
+        marker.position = LatLng(initLat, initLng)
+        marker.map = naverMap
     }
 
-    // 프래그먼트 재개 시 자동 슬라이드 시작
     override fun onResume() {
         super.onResume()
         slideHandler.post(slideRunnable)
     }
 
-    // 프래그먼트 정지 시 자동 슬라이드 중지
     override fun onPause() {
         super.onPause()
         slideHandler.removeCallbacks(slideRunnable)
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }

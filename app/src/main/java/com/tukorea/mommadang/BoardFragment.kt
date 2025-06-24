@@ -36,9 +36,8 @@ class BoardFragment : Fragment() {
             val content = data?.getStringExtra("content")
             val category = data?.getStringExtra("category")
 
-            val prefs =
-                requireActivity().getSharedPreferences("user_prefs", AppCompatActivity.MODE_PRIVATE)
-            val author = prefs.getString("user_name", "알 수 없음") ?: "알 수 없음"
+            val prefs = requireActivity().getSharedPreferences("user_prefs", AppCompatActivity.MODE_PRIVATE)
+            val author = prefs.getString("user_nickname", "알 수 없음") ?: "알 수 없음"
 
             if (title != null && content != null && category != null) {
                 when (category) {
@@ -183,8 +182,7 @@ class BoardFragment : Fragment() {
         val activeTextColor = ContextCompat.getColor(requireContext(), R.color.bt_click_textColor)
         val inactiveTextColor = ContextCompat.getColor(requireContext(), R.color.textColor1)
 
-        val allButtons =
-            listOf(binding.btnFree, binding.btnMarket, binding.btnProud, binding.btnInfo)
+        val allButtons = listOf(binding.btnFree, binding.btnMarket, binding.btnProud, binding.btnInfo)
 
         allButtons.forEach { button ->
             val isSelected = when (button) {

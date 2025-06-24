@@ -290,22 +290,35 @@
                                 android:contentDescription="내 정보"
                                 android:src="@drawable/profile_photo" />
 
+
                         </LinearLayout>
                     </com.google.android.material.card.MaterialCardView>
-
-                    <!-- 지도 -->
-
-                    <!--            니중에 ImageView 삭제 후 미니맵으로 변경-->
-                    <!--            <com.naver.maps.map.MapView-->
-                    <ImageView
-                        android:id="@+id/mini_map_view"
+                    <FrameLayout
+                        android:id="@+id/mapMiniContainer"
                         android:layout_width="match_parent"
                         android:layout_height="180dp"
                         android:layout_marginTop="16dp"
                         android:background="@drawable/bg_card_rounded"
-                        android:clipToOutline="true"
-                        android:scaleType="centerCrop"
-                        android:src="@drawable/sample_map" />
+                        android:clipToOutline="true">
+
+                        <!-- 네이버 지도 -->
+                        <fragment
+                            android:id="@+id/map_fragment"
+                            android:name="com.naver.maps.map.MapFragment"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent" />
+
+                        <!-- 클릭 감지용 투명 오버레이 -->
+                        <View
+                            android:id="@+id/mapOverlay"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@android:color/transparent"
+                            android:clickable="true"
+                            android:focusable="true" />
+                    </FrameLayout>
+
+
                 </LinearLayout>
             </ScrollView>
         </LinearLayout>
