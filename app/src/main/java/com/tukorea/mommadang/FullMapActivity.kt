@@ -25,6 +25,10 @@ class FullMapActivity : AppCompatActivity(), OnMapReadyCallback {
         binding = ActivityFullMapBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        binding.btBack2.setOnClickListener {    //뒤로가기 버튼 좌상단
+            finish()
+        }
+        
         // 인텐트로 받은 좌표 (필요 없으면 빼도 돼)
         initLat = intent.getDoubleExtra("lat", initLat)
         initLng = intent.getDoubleExtra("lng", initLng)

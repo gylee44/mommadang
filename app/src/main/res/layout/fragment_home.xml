@@ -18,7 +18,8 @@
             android:elevation="4dp"
             android:gravity="center_vertical"
             android:orientation="horizontal"
-            android:paddingHorizontal="16dp">
+            android:paddingHorizontal="16dp"
+            android:translationZ="10dp">
 
             <ImageView
                 android:id="@+id/bt_menu"
