@@ -18,78 +18,23 @@
             android:elevation="4dp"
             android:gravity="center_vertical"
             android:orientation="horizontal"
-            android:paddingHorizontal="16dp">
+            android:paddingHorizontal="16dp"
+            android:translationZ="10dp">
 
             <ImageView
                 android:id="@+id/bt_menu"
                 android:layout_width="24dp"
                 android:layout_height="24dp"
                 android:contentDescription="메뉴"
+                android:foreground="?attr/selectableItemBackgroundBorderless"
+                android:clickable="true"
+                android:focusable="true"
                 android:src="@drawable/ic_burger_menu" />
 
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="게시판"
-                android:textSize="16sp"
-                android:textColor="#222222" />
-        </LinearLayout>
-
-        <!-- 지도 & 내 정보 -->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginBottom="16dp"
-            android:weightSum="2">
-            <!-- 지도 -->
-            <!--<ImageView
-                android:id="@+id/mini_map_view"
-                android:layout_width="match_parent"
-                android:layout_height="180dp"
-                android:layout_marginTop="16dp"
-                android:background="@drawable/bg_card_rounded"
-                android:clipToOutline="true"
-                android:scaleType="centerCrop"
-                android:src="@drawable/sample_map" />-->
-
-            <!-- 지도 -->
-            <!--<FrameLayout
-                android:id="@+id/mapMiniContainer"
-                android:layout_width="match_parent"
-                android:layout_height="180dp"
-                android:layout_marginTop="16dp">
-
-                &lt;!&ndash; 실제 NaverMapFragment &ndash;&gt;
-                <fragment
-                    android:id="@+id/map_fragment"
-                    android:name="com.naver.maps.map.MapFragment"
-                    android:layout_width="match_parent"
-                    android:layout_height="180dp"
-                    android:layout_marginTop="16dp"/>
-
-                &lt;!&ndash; 클릭 전용 투명 오버레이 &ndash;&gt;
-                <View
-                    android:id="@+id/mapOverlay"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="@android:color/transparent"
-                    android:clickable="true"
-                    android:focusable="true" />
-
-            </FrameLayout>-->
-
-
-
-
-            <!-- 내 정보 -->
-            <LinearLayout
-                android:id="@+id/profileCardContainer"
-                android:layout_width="0dp"
-                android:layout_height="120dp"
-                android:layout_weight="1"
-                android:orientation="vertical"
                 android:gravity="center"
                 android:text="홈"
                 android:textColor="@color/textColor1"

@@ -17,6 +17,7 @@ class FreeBoardFragment : Fragment() {
     private var _binding: FragmentFreeBoardBinding? = null
     private val binding get() = _binding!!
 
+    private val fullPostList = mutableListOf<Post>()
     private val postList = mutableListOf<Post>() // title, content, author, timestamp
     private var adapter: PostAdapter? = null
     private val db = FirebaseFirestore.getInstance()
@@ -75,6 +76,7 @@ class FreeBoardFragment : Fragment() {
             .get()
             .addOnSuccessListener { result ->
                 postList.clear()
+                fullPostList.clear()
                 for (document in result) {
                     val title = document.getString("title") ?: ""
                     val content = document.getString("content") ?: ""
@@ -82,6 +84,7 @@ class FreeBoardFragment : Fragment() {
                     val timestamp = document.getLong("timestamp") ?: 0L
                     val category = document.getString("category") ?: "자유 게시판"
                     postList.add(Post(title, content, author, timestamp, category))
+                    fullPostList.add(Post(title, content, author, timestamp, category))
                 }
                 adapter?.notifyDataSetChanged()
             }
@@ -91,5 +94,18 @@ class FreeBoardFragment : Fragment() {
             }
     }
 
-
+    fun filterPosts(query: String) {
+        postList.clear()
+        if (query.isBlank()) {
+            postList.addAll(fullPostList)
+        } else {
+            postList.addAll(
+                fullPostList.filter {
+                    it.title.contains(query, ignoreCase = true) ||
+                            it.content.contains(query, ignoreCase = true)
+                }
+            )
+        }
+        adapter?.notifyDataSetChanged()
+    }
 }

@@ -18,6 +18,7 @@ class InfoBoardFragment : Fragment() {
     private var _binding: FragmentInfoBoardBinding? = null
     private val binding get() = _binding!!
 
+    private val fullPostList = mutableListOf<Post>()
     private val postList = mutableListOf<Post>() // title, content, author, timestamp
     private var adapter: PostAdapter? = null
     private val db = FirebaseFirestore.getInstance()
@@ -77,6 +78,7 @@ class InfoBoardFragment : Fragment() {
             .get()
             .addOnSuccessListener { result ->
                 postList.clear()
+                fullPostList.clear()
                 for (document in result) {
                     val title = document.getString("title") ?: ""
                     val content = document.getString("content") ?: ""
@@ -84,6 +86,7 @@ class InfoBoardFragment : Fragment() {
                     val timestamp = document.getLong("timestamp") ?: 0L
                     val category = document.getString("category") ?: "정보 게시판"
                     postList.add(Post(title, content, author, timestamp, category))
+                    fullPostList.add(Post(title, content, author, timestamp, category))
                 }
                 adapter?.notifyDataSetChanged()
             }
@@ -91,6 +94,21 @@ class InfoBoardFragment : Fragment() {
                 Toast.makeText(requireContext(), "게시글 불러오기 실패", Toast.LENGTH_SHORT).show()
                 Log.e("Firestore", "Error loading posts", it)
             }
+    }
+
+    fun filterPosts(query: String) {
+        postList.clear()
+        if (query.isBlank()) {
+            postList.addAll(fullPostList)
+        } else {
+            postList.addAll(
+                fullPostList.filter {
+                    it.title.contains(query, ignoreCase = true) ||
+                            it.content.contains(query, ignoreCase = true)
+                }
+            )
+        }
+        adapter?.notifyDataSetChanged()
     }
 
 

@@ -238,10 +238,10 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
                 }
                 R.id.nav_map -> {
                     Toast.makeText(requireContext(), "지도 화면으로 이동", Toast.LENGTH_SHORT).show()
-                    parentFragmentManager.beginTransaction()
-                        .replace(R.id.container_main, MapFragment())
-                        .addToBackStack(null)
-                        .commit()
+                    startActivity(Intent(requireContext(), FullMapActivity::class.java).apply {
+                        putExtra("lat", initLat)
+                        putExtra("lng", initLng)
+                    })
                 }
             }
             binding.drawerLayout.closeDrawers()

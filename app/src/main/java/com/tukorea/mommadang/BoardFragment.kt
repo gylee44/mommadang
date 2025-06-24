@@ -62,9 +62,37 @@ class BoardFragment : Fragment() {
             writeLauncher.launch(intent)
         }
 
+        binding.btnSearch.setOnClickListener {
+            if (binding.searchInput.visibility == View.GONE) {
+                binding.searchInput.visibility = View.VISIBLE
+                binding.searchInput.requestFocus()
+            } else {
+                binding.searchInput.visibility = View.GONE
+                binding.searchInput.setText("")
+            }
+        }
+
+        binding.searchInput.addTextChangedListener(object : android.text.TextWatcher {
+            override fun afterTextChanged(s: android.text.Editable?) {
+                val query = s.toString().trim()
+                when (selectedCategory) {
+                    "자유 게시판" -> freeBoardFragment.filterPosts(query)
+                    "중고 거래" -> marketBoardFragment.filterPosts(query)
+                    "자녀 자랑 게시판" -> proudBoardFragment.filterPosts(query)
+                    "정보 게시판" -> infoBoardFragment.filterPosts(query)
+                }
+            }
+
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
+        })
+
+
         // 카테고리 버튼 클릭 시
         binding.btnFree.setOnClickListener {
             selectedCategory = "자유 게시판"
+            binding.searchInput.setText("")
+            binding.searchInput.visibility = View.GONE
             updateCategorySelection()
             childFragmentManager.beginTransaction()
                 .replace(R.id.board_content_container, freeBoardFragment)
@@ -73,6 +101,8 @@ class BoardFragment : Fragment() {
 
         binding.btnMarket.setOnClickListener {
             selectedCategory = "중고 거래"
+            binding.searchInput.setText("")
+            binding.searchInput.visibility = View.GONE
             updateCategorySelection()
             childFragmentManager.beginTransaction()
                 .replace(R.id.board_content_container, marketBoardFragment)
@@ -81,6 +111,8 @@ class BoardFragment : Fragment() {
 
         binding.btnProud.setOnClickListener {
             selectedCategory = "자녀 자랑 게시판"
+            binding.searchInput.setText("")
+            binding.searchInput.visibility = View.GONE
             updateCategorySelection()
             childFragmentManager.beginTransaction()
                 .replace(R.id.board_content_container, proudBoardFragment)
@@ -89,6 +121,8 @@ class BoardFragment : Fragment() {
 
         binding.btnInfo.setOnClickListener {
             selectedCategory = "정보 게시판"
+            binding.searchInput.setText("")
+            binding.searchInput.visibility = View.GONE
             updateCategorySelection()
             childFragmentManager.beginTransaction()
                 .replace(R.id.board_content_container, infoBoardFragment)
@@ -108,15 +142,18 @@ class BoardFragment : Fragment() {
                         .replace(R.id.container_main, HomeFragment())
                         .commit()
                 }
+
                 R.id.nav_board -> {
 //                    Toast.makeText(requireContext(), "게시판으로 이동", Toast.LENGTH_SHORT).show()
                 }
+
                 R.id.nav_profile -> {
                     Toast.makeText(requireContext(), "프로필 창으로 이동", Toast.LENGTH_SHORT).show()
                     requireActivity().supportFragmentManager.beginTransaction()
                         .replace(R.id.container_main, ProfileFragment())
                         .commit()
                 }
+
                 R.id.nav_map -> {
                     Toast.makeText(requireContext(), "지도 화면으로 이동", Toast.LENGTH_SHORT).show()
                     requireActivity().supportFragmentManager.beginTransaction()
