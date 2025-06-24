@@ -1,9 +1,8 @@
-    <androidx.drawerlayout.widget.DrawerLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/drawer_layout"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+<androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/drawer_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
     <FrameLayout
         android:layout_width="match_parent"
@@ -25,10 +24,10 @@
                 android:id="@+id/bt_menu"
                 android:layout_width="24dp"
                 android:layout_height="24dp"
-                android:contentDescription="메뉴"
-                android:foreground="?attr/selectableItemBackgroundBorderless"
                 android:clickable="true"
+                android:contentDescription="메뉴"
                 android:focusable="true"
+                android:foreground="?attr/selectableItemBackgroundBorderless"
                 android:src="@drawable/ic_burger_menu" />
 
             <TextView
@@ -76,16 +75,16 @@
                         android:layout_width="match_parent"
                         android:layout_height="180dp"
                         android:layout_marginBottom="20dp"
+                        app:cardBackgroundColor="@android:color/transparent"
                         app:cardCornerRadius="16dp"
-                        app:cardElevation="4dp"
-                        app:cardBackgroundColor="@android:color/transparent">
+                        app:cardElevation="4dp">
 
-                    <androidx.viewpager2.widget.ViewPager2
-                        android:id="@+id/viewPager"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:background="@drawable/bg_card_rounded"
-                        android:clipToOutline="true" />
+                        <androidx.viewpager2.widget.ViewPager2
+                            android:id="@+id/viewPager"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@drawable/bg_card_rounded"
+                            android:clipToOutline="true" />
                     </com.google.android.material.card.MaterialCardView>
 
                     <!-- 날씨 카드 -->
@@ -108,17 +107,31 @@
                             android:orientation="vertical"
                             android:padding="16dp">
 
-                            <!-- 요일 + 날짜 -->
-                            <TextView
-                                android:id="@+id/today_info"
-                                android:layout_width="wrap_content"
+                            <LinearLayout
+                                android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_marginStart="4dp"
-                                android:text="TUESDAY · 2025.06.24"
-                                android:textColor="@color/textColor1"
-                                android:letterSpacing="0.03"
-                                android:textSize="23sp"
-                                android:textStyle="bold" />
+                                android:orientation="horizontal">
+                                <!-- 요일 + 날짜 -->
+                                <TextView
+                                    android:id="@+id/today_info"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="4dp"
+                                    android:letterSpacing="0.03"
+                                    android:text="TUESDAY"
+                                    android:textColor="@color/textColor1"
+                                    android:textSize="23sp"
+                                    android:textStyle="bold" />
+
+                                <TextView
+                                    android:id="@+id/today_info2"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="16dp"
+                                    android:text="2025.06.24"
+                                    android:textColor="@color/textColor1"
+                                    android:textSize="16sp" />
+                            </LinearLayout>
 
                             <!-- 기온 + 날씨 아이콘 -->
                             <LinearLayout
@@ -128,39 +141,57 @@
                                 android:gravity="center_vertical"
                                 android:orientation="horizontal">
 
+                                <!-- 미세먼지 정보 묶음 -->
+                                <LinearLayout
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginHorizontal="12dp"
+                                    android:layout_marginTop="4dp"
+                                    android:orientation="vertical">
+
+                                    <TextView
+                                        android:id="@+id/fine_dust"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="미세먼지"
+                                        android:textColor="@color/textColor3_sun"
+                                        android:textSize="16sp" />
+
+                                    <TextView
+                                        android:id="@+id/fine_dust_value"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginTop="2dp"
+                                        android:text="PM10: 34㎍/㎥"
+                                        android:textColor="@color/textColor3_sun"
+                                        android:textSize="14sp"
+                                        android:textStyle="bold" />
+                                </LinearLayout>
+
+
                                 <!-- 기온 -->
                                 <TextView
                                     android:id="@+id/today_temp"
                                     android:layout_width="0dp"
                                     android:layout_height="wrap_content"
+                                    android:layout_marginRight="16dp"
                                     android:layout_weight="1"
-                                    android:gravity="start"
+                                    android:gravity="end"
                                     android:text="22℃"
                                     android:textColor="@color/textColor1"
-                                    android:textSize="48sp"
-                                    android:textStyle="bold" />
+                                    android:textSize="48sp" />
 
                                 <!-- 날씨 이미지 -->
                                 <ImageView
                                     android:id="@+id/weather_icon"
                                     android:layout_width="50dp"
                                     android:layout_height="50dp"
-                                    android:src="@drawable/ic_weather_sun"
-                                    android:contentDescription="날씨 상태" />
+                                    android:contentDescription="날씨 상태"
+                                    android:src="@drawable/ic_weather_sun" />
                             </LinearLayout>
 
-                            <!-- 미세먼지 텍스트 -->
-                            <TextView
-                                android:id="@+id/fine_dust_text"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="8dp"
-                                android:text="미세먼지: PM10 34㎍/㎥"
-                                android:textColor="@color/textColor1"
-                                android:textSize="16sp" />
                         </LinearLayout>
                     </com.google.android.material.card.MaterialCardView>
-
 
 
                     <!-- 게시판 카드 -->
@@ -285,6 +316,7 @@
 
                         </LinearLayout>
                     </com.google.android.material.card.MaterialCardView>
+
                     <FrameLayout
                         android:id="@+id/mapMiniContainer"
                         android:layout_width="match_parent"
@@ -315,13 +347,14 @@
             </ScrollView>
         </LinearLayout>
     </FrameLayout>
-        <com.google.android.material.navigation.NavigationView
-            android:id="@+id/nav_view"
-            android:layout_width="240dp"
-            android:layout_height="match_parent"
-            android:layout_gravity="start"
-            android:background="@color/backgroundColor"
-            app:headerLayout="@layout/nav_header"
-            app:itemTextColor="@color/nav_item_text_color"
-            app:menu="@menu/drawer_menu" />
-    </androidx.drawerlayout.widget.DrawerLayout>
+
+    <com.google.android.material.navigation.NavigationView
+        android:id="@+id/nav_view"
+        android:layout_width="240dp"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:background="@color/backgroundColor"
+        app:headerLayout="@layout/nav_header"
+        app:itemTextColor="@color/nav_item_text_color"
+        app:menu="@menu/drawer_menu" />
+</androidx.drawerlayout.widget.DrawerLayout>

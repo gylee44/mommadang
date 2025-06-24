@@ -130,7 +130,8 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
 
 
                     // 날짜/요일 출력
-                    binding.todayInfo.text = "${getDayOfWeek()} · ${getTodayDateFormatted()}"
+                    binding.todayInfo.text = "${getDayOfWeek()}"
+                    binding.todayInfo2.text = "${getTodayDateFormatted()}"
 
                     // 기온 출력
                     binding.todayTemp.text = "${tmp ?: "--"}℃"
