@@ -117,7 +117,8 @@
                                 android:text="TUESDAY · 2025.06.24"
                                 android:textColor="@color/textColor1"
                                 android:letterSpacing="0.03"
-                                android:textSize="23sp" />
+                                android:textSize="23sp"
+                                android:textStyle="bold" />
 
                             <!-- 기온 + 날씨 아이콘 -->
                             <LinearLayout
@@ -148,92 +149,20 @@
                                     android:contentDescription="날씨 상태" />
                             </LinearLayout>
 
+                            <!-- 미세먼지 텍스트 -->
+                            <TextView
+                                android:id="@+id/fine_dust_text"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="8dp"
+                                android:text="미세먼지: PM10 34㎍/㎥"
+                                android:textColor="@color/textColor1"
+                                android:textSize="16sp" />
                         </LinearLayout>
                     </com.google.android.material.card.MaterialCardView>
 
-                    <!--<com.google.android.material.card.MaterialCardView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginHorizontal="0dp"
-                        android:layout_marginBottom="28dp"
-                        app:cardBackgroundColor="@android:color/transparent"
-                        app:cardCornerRadius="32dp"
-                        app:cardElevation="4dp"
-                        app:strokeWidth="0dp">
 
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:background="@drawable/bg_weather_sun"
-                            android:clipToOutline="true"
-                            android:orientation="vertical"
-                            android:padding="16dp">
 
-                            <TextView
-                                android:id="@+id/day_of_the_week"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginStart="4dp"
-                                android:text="TUESDAY"
-                                android:textColor="@color/textColor1"
-                                android:letterSpacing="0.03"
-                                android:textSize="23sp" />
-
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="8dp"
-                                android:gravity="center_vertical"
-                                android:orientation="horizontal">
-
-                                &lt;!&ndash; 미세먼지 정보 묶음 &ndash;&gt;
-                                <LinearLayout
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginTop="4dp"
-                                    android:layout_marginHorizontal="12dp"
-                                    android:orientation="vertical">
-
-                                    <TextView
-                                        android:id="@+id/fine_dust"
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:text="미세먼지"
-                                        android:textColor="@color/textColor3_sun"
-                                        android:textSize="16sp" />
-
-                                    <TextView
-                                        android:id="@+id/fine_dust_value"
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:layout_marginTop="2dp"
-                                        android:text="PM10: 34㎍/㎥"
-                                        android:textStyle="bold"
-                                        android:textColor="@color/textColor3_sun"
-                                        android:textSize="14sp" />
-                                </LinearLayout>
-
-                                <TextView
-                                    android:id="@+id/temperature"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginHorizontal="12dp"
-                                    android:layout_weight="1"
-                                    android:gravity="end"
-                                    android:paddingRight="8dp"
-                                    android:text="19℃"
-                                    android:textColor="@color/textColor1"
-                                    android:textSize="48sp" />
-
-                                <ImageView
-                                    android:id="@+id/ic_weather"
-                                    android:layout_width="50dp"
-                                    android:layout_height="50dp"
-                                    android:src="@drawable/ic_weather_sun" />
-                            </LinearLayout>
-
-                        </LinearLayout>
-                    </com.google.android.material.card.MaterialCardView>-->
                     <!-- 게시판 카드 -->
                     <com.google.android.material.card.MaterialCardView
                         android:id="@+id/boardCard"
