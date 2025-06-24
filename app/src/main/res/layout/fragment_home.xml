@@ -31,6 +31,65 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:text="게시판"
+                android:textSize="16sp"
+                android:textColor="#222222" />
+        </LinearLayout>
+
+        <!-- 지도 & 내 정보 -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="16dp"
+            android:weightSum="2">
+            <!-- 지도 -->
+            <!--<ImageView
+                android:id="@+id/mini_map_view"
+                android:layout_width="match_parent"
+                android:layout_height="180dp"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/bg_card_rounded"
+                android:clipToOutline="true"
+                android:scaleType="centerCrop"
+                android:src="@drawable/sample_map" />-->
+
+            <!-- 지도 -->
+            <!--<FrameLayout
+                android:id="@+id/mapMiniContainer"
+                android:layout_width="match_parent"
+                android:layout_height="180dp"
+                android:layout_marginTop="16dp">
+
+                &lt;!&ndash; 실제 NaverMapFragment &ndash;&gt;
+                <fragment
+                    android:id="@+id/map_fragment"
+                    android:name="com.naver.maps.map.MapFragment"
+                    android:layout_width="match_parent"
+                    android:layout_height="180dp"
+                    android:layout_marginTop="16dp"/>
+
+                &lt;!&ndash; 클릭 전용 투명 오버레이 &ndash;&gt;
+                <View
+                    android:id="@+id/mapOverlay"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@android:color/transparent"
+                    android:clickable="true"
+                    android:focusable="true" />
+
+            </FrameLayout>-->
+
+
+
+
+            <!-- 내 정보 -->
+            <LinearLayout
+                android:id="@+id/profileCardContainer"
+                android:layout_width="0dp"
+                android:layout_height="120dp"
+                android:layout_weight="1"
+                android:orientation="vertical"
                 android:gravity="center"
                 android:text="홈"
                 android:textColor="@color/textColor1"
@@ -287,22 +346,35 @@
                                 android:contentDescription="내 정보"
                                 android:src="@drawable/profile_photo" />
 
+
                         </LinearLayout>
                     </com.google.android.material.card.MaterialCardView>
-
-                    <!-- 지도 -->
-
-                    <!--            니중에 ImageView 삭제 후 미니맵으로 변경-->
-                    <!--            <com.naver.maps.map.MapView-->
-                    <ImageView
-                        android:id="@+id/mini_map_view"
+                    <FrameLayout
+                        android:id="@+id/mapMiniContainer"
                         android:layout_width="match_parent"
                         android:layout_height="180dp"
                         android:layout_marginTop="16dp"
                         android:background="@drawable/bg_card_rounded"
-                        android:clipToOutline="true"
-                        android:scaleType="centerCrop"
-                        android:src="@drawable/sample_map" />
+                        android:clipToOutline="true">
+
+                        <!-- 네이버 지도 -->
+                        <fragment
+                            android:id="@+id/map_fragment"
+                            android:name="com.naver.maps.map.MapFragment"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent" />
+
+                        <!-- 클릭 감지용 투명 오버레이 -->
+                        <View
+                            android:id="@+id/mapOverlay"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@android:color/transparent"
+                            android:clickable="true"
+                            android:focusable="true" />
+                    </FrameLayout>
+
+
                 </LinearLayout>
             </ScrollView>
         </LinearLayout>
