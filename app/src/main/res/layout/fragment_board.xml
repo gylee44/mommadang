@@ -24,6 +24,9 @@
                 android:layout_width="24dp"
                 android:layout_height="24dp"
                 android:contentDescription="메뉴"
+                android:foreground="?attr/selectableItemBackgroundBorderless"
+                android:clickable="true"
+                android:focusable="true"
                 android:src="@drawable/ic_burger_menu" />
 
             <TextView
@@ -38,10 +41,14 @@
                 android:textStyle="bold" />
 
             <ImageView
+                android:id="@+id/btn_search"
                 android:layout_width="24dp"
                 android:layout_height="24dp"
                 android:layout_marginRight="16dp"
                 android:contentDescription="검색"
+                android:foreground="?attr/selectableItemBackgroundBorderless"
+                android:clickable="true"
+                android:focusable="true"
                 android:src="@drawable/ic_search1" />
 
             <ImageView
@@ -68,14 +75,17 @@
                 <!-- 상단 제목-->
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="12dp">
+                    android:layout_height="36dp"
+                    android:layout_marginBottom="12dp"
+                    android:orientation="horizontal">
 
                     <TextView
                         android:id="@+id/board_title"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="소통 공간"
+                        android:layout_gravity="center_vertical"
+                        android:textColor="@color/textColor1"
                         android:textSize="20sp"
                         android:textStyle="bold" />
 
@@ -83,8 +93,28 @@
                         android:layout_width="20dp"
                         android:layout_height="20dp"
                         android:layout_gravity="center_vertical"
-                        android:layout_marginLeft="8dp"
+                        android:layout_marginLeft="6dp"
                         android:src="@drawable/speech_bubble2" />
+
+                    <View
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1" />
+
+                    <!-- 검색 EditText -->
+                    <EditText
+                        android:id="@+id/search_input"
+                        android:layout_width="180dp"
+                        android:layout_height="36dp"
+                        android:background="@drawable/bg_search_input"
+                        android:hint="제목 or 내용 검색"
+                        android:paddingHorizontal="12dp"
+                        android:textSize="14sp"
+                        android:drawableStart="@drawable/ic_search2"
+                        android:drawablePadding="6dp"
+                        android:inputType="text"
+                        android:imeOptions="actionSearch"
+                        android:visibility="gone" />
                 </LinearLayout>
 
                 <!-- 카테고리 탭 -->

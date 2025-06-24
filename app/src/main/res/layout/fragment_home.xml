@@ -25,6 +25,9 @@
                 android:layout_width="24dp"
                 android:layout_height="24dp"
                 android:contentDescription="메뉴"
+                android:foreground="?attr/selectableItemBackgroundBorderless"
+                android:clickable="true"
+                android:focusable="true"
                 android:src="@drawable/ic_burger_menu" />
 
             <TextView
