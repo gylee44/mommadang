@@ -64,16 +64,18 @@ dependencies {
     // Glide - 이미지 로딩
     implementation("com.github.bumptech.glide:glide:4.16.0")
     annotationProcessor("com.github.bumptech.glide:compiler:4.16.0")
-
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
-
-
     implementation("androidx.viewpager2:viewpager2:1.0.0")  // view2 사용
     implementation("com.github.bumptech.glide:glide:4.16.0")    // Glide 사용
     kapt("com.github.bumptech.glide:compiler:4.16.0")  // 코틀린 KAPT 사용 시
     implementation("jp.wasabeef:glide-transformations:4.3.0")   // Glide의 사진 편집
     implementation ("com.google.android.material:material:1.10.0")  // MaterialCardView사용
     implementation("com.naver.maps:map-sdk:3.22.0")
+
+    // 날씨 api 의존성
+    implementation("com.squareup.retrofit2:retrofit:2.9.0")
+    implementation("com.squareup.retrofit2:converter-gson:2.9.0")
+
 }

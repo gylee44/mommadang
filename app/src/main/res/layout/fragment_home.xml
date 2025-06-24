@@ -144,7 +144,69 @@
                     </com.google.android.material.card.MaterialCardView>
 
                     <!-- 날씨 카드 -->
+
                     <com.google.android.material.card.MaterialCardView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="0dp"
+                        android:layout_marginBottom="28dp"
+                        app:cardBackgroundColor="@android:color/transparent"
+                        app:cardCornerRadius="32dp"
+                        app:cardElevation="4dp"
+                        app:strokeWidth="0dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/bg_weather_sun"
+                            android:clipToOutline="true"
+                            android:orientation="vertical"
+                            android:padding="16dp">
+
+                            <!-- 요일 + 날짜 -->
+                            <TextView
+                                android:id="@+id/today_info"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="4dp"
+                                android:text="TUESDAY · 2025.06.24"
+                                android:textColor="@color/textColor1"
+                                android:letterSpacing="0.03"
+                                android:textSize="23sp" />
+
+                            <!-- 기온 + 날씨 아이콘 -->
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="8dp"
+                                android:gravity="center_vertical"
+                                android:orientation="horizontal">
+
+                                <!-- 기온 -->
+                                <TextView
+                                    android:id="@+id/today_temp"
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:gravity="start"
+                                    android:text="22℃"
+                                    android:textColor="@color/textColor1"
+                                    android:textSize="48sp"
+                                    android:textStyle="bold" />
+
+                                <!-- 날씨 이미지 -->
+                                <ImageView
+                                    android:id="@+id/weather_icon"
+                                    android:layout_width="50dp"
+                                    android:layout_height="50dp"
+                                    android:src="@drawable/ic_weather_sun"
+                                    android:contentDescription="날씨 상태" />
+                            </LinearLayout>
+
+                        </LinearLayout>
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <!--<com.google.android.material.card.MaterialCardView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginHorizontal="0dp"
@@ -179,7 +241,7 @@
                                 android:gravity="center_vertical"
                                 android:orientation="horizontal">
 
-                                <!-- 미세먼지 정보 묶음 -->
+                                &lt;!&ndash; 미세먼지 정보 묶음 &ndash;&gt;
                                 <LinearLayout
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
@@ -226,7 +288,7 @@
                             </LinearLayout>
 
                         </LinearLayout>
-                    </com.google.android.material.card.MaterialCardView>
+                    </com.google.android.material.card.MaterialCardView>-->
                     <!-- 게시판 카드 -->
                     <com.google.android.material.card.MaterialCardView
                         android:id="@+id/boardCard"

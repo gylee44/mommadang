@@ -20,8 +20,46 @@ import com.naver.maps.map.OnMapReadyCallback
 import com.naver.maps.map.overlay.Marker
 import com.tukorea.mommadang.databinding.FragmentHomeBinding
 import jp.wasabeef.glide.transformations.CropTransformation
+// 날씨
+import androidx.lifecycle.lifecycleScope
+import com.tukorea.mommadang.api.RetrofitClient
+import kotlinx.coroutines.launch
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
+import java.util.Calendar
+import com.tukorea.mommadang.utils.DateUtils.getBaseDateTime
+
+
+
+
+
 
 class HomeFragment : Fragment(), OnMapReadyCallback {
+
+    // 날씨 주기적으로 받아오는 함수
+    private fun getBaseDateTime(): Pair<String, String> {
+        val calendar = Calendar.getInstance()
+        calendar.time = Date()
+
+        val currentHour = calendar.get(Calendar.HOUR_OF_DAY)
+        val currentMinute = calendar.get(Calendar.MINUTE)
+
+        val baseTimes = listOf(2, 5, 8, 11, 14, 17, 20, 23)
+        var baseTimeHour = baseTimes.lastOrNull { it <= currentHour } ?: 23
+
+        if (currentHour == 0 || (currentHour == 2 && currentMinute < 30)) {
+            calendar.add(Calendar.DATE, -1)
+            baseTimeHour = 23
+        }
+
+        val baseDate = SimpleDateFormat("yyyyMMdd", Locale.KOREA).format(calendar.time)
+        val baseTime = String.format("%02d00", baseTimeHour)
+
+        return Pair(baseDate, baseTime)
+    }
+
+
 
     private lateinit var bannerItems: List<BannerItem>
     private lateinit var adapter: BannerAdapter
@@ -55,6 +93,72 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+
+        // 날씨 api 호출
+        lifecycleScope.launch {
+            try {
+                val (baseDate, baseTime) = getBaseDateTime()
+                Log.d("Weather", "요청 baseDate: $baseDate, baseTime: $baseTime")
+                val nx = 56  // 시흥시 격자좌표
+                val ny = 124
+
+
+                val response = RetrofitClient.instance.getWeather(
+                    serviceKey = "gp1oeAt31dIFh6jUiegvQxvkno3y4ImmNCcdqOIHVFIWDFgfIK5z8HZTeaR0J3ly%2BKseGmaFBBXJlCl9Hw%2F5Fg%3D%3D",
+                    pageNo = 1,
+                    numOfRows = 1000,
+                    dataType = "JSON",
+                    baseDate = baseDate,
+                    baseTime = baseTime,
+                    nx = nx,
+                    ny = ny
+                )   // 56, 124
+
+                if (response.isSuccessful) {
+                    val items = response.body()?.response?.body?.items?.item
+                    val now = Calendar.getInstance()
+                    val nowHour = now.get(Calendar.HOUR_OF_DAY)
+                    val forecastHour = (nowHour / 3) * 3
+                    val fcstTime = String.format("%02d00", forecastHour)
+
+
+
+                    val tmp = items?.firstOrNull { it.category == "TMP" && it.fcstTime == fcstTime }?.fcstValue
+                    val sky = items?.firstOrNull { it.category == "SKY" && it.fcstTime == fcstTime }?.fcstValue
+                    val pty = items?.firstOrNull { it.category == "PTY" && it.fcstTime == fcstTime }?.fcstValue
+
+
+                    // 날짜/요일 출력
+                    binding.todayInfo.text = "${getDayOfWeek()} · ${getTodayDateFormatted()}"
+
+                    // 기온 출력
+                    binding.todayTemp.text = "${tmp ?: "--"}℃"
+
+                    // 날씨 이미지 출력
+                    val iconRes = when {
+                        pty == "1" || pty == "2" || pty == "4" -> R.drawable.ic_weather_rain
+                        sky == "1" -> R.drawable.ic_weather_sun
+                        else -> R.drawable.ic_weather_cloud
+                    }
+                    binding.weatherIcon.setImageResource(iconRes)
+
+                } else {
+                    Log.e("Weather", "API 실패: ${response.code()}")
+                }
+
+            } catch (e: Exception) {
+                Log.e("Weather", "예외 발생: ${e.localizedMessage}")
+            }
+        }
+
+        /*val iconRes = when {
+                        pty == "1" || pty == "2" || pty == "4" -> R.drawable.ic_weather_rain
+                        sky == "1" -> R.drawable.ic_weather_sun
+                        sky == "3" -> R.drawable.ic_weather_cloud
+                        else -> R.drawable.ic_weather_sun
+                    }*/
+
 
         // 배너 아이템 세팅
         val realBannerItems = listOf(
@@ -175,6 +279,24 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
 
         mapFrag.getMapAsync(this)
     }
+
+    // 날짜 반환 함수
+    private fun getTodayDate(): String {
+        val sdf = SimpleDateFormat("yyyyMMdd", Locale.KOREA)
+        return sdf.format(Date())
+    }
+
+    private fun getTodayDateFormatted(): String {
+        val sdf = SimpleDateFormat("yyyy.MM.dd", Locale.KOREA)
+        return sdf.format(Date())
+    }
+
+    private fun getDayOfWeek(): String {
+        val sdf = SimpleDateFormat("EEEE", Locale.ENGLISH)
+        return sdf.format(Date()).uppercase() // 예: TUESDAY
+    }
+
+
 
     override fun onMapReady(naverMap: NaverMap) {
         naverMap.uiSettings.apply {
